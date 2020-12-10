@@ -1,0 +1,158 @@
+@import '../../styles/variable.scss';
+
+.login-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(101, 251, 210, 0.1);
+    }
+
+    .form-container {
+        width: 500px;
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 10px 20px 10px 20px;
+        background: rgba(62, 193, 155, 0.85);
+
+        &-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+        }
+
+        &-title {
+            font-family: $font-beVietnam-bold;
+            font-weight: 1000;
+            font-size: 40px;
+            color: #fff;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding-left: 28px;
+
+            .text {
+                align-self: flex-start;
+                border-bottom: 3px solid white;
+            }
+        }
+
+        .ant-form {
+            width: 100%;
+            padding: 36px 90px 0px 90px;
+
+            .ant-form-item {
+                justify-content: center;
+                display: flex;
+                text-align: center;
+                margin-bottom: 0px;
+
+                .ant-input {
+                    font: 400 18px $font-beVietnam-regular;
+                    height: 48px;
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    box-shadow: none;
+                    border-width: 0px;
+                    margin-bottom: 36px;
+                }
+
+                .ant-input-affix-wrapper {
+                    padding: 0rem 12px 0rem 0rem;
+                    margin-bottom: 36px;
+                    border-radius: 6px;
+                    border-width: 0px;
+
+                    .ant-input {
+                        border: 0px;
+                        margin-bottom: 0px;
+                    }
+                }
+
+                .ant-form-item-explain-error {
+                    font: 16px $font-beVietnam-regular;
+                    margin-top: -32px;
+                    margin-bottom: 12px;
+                    color: #324b4b;
+                }
+
+                .ant-checkbox-wrapper {
+                    margin-top: -30px;
+                    font: 14px $font-beVietnam-regular;
+                    float: left;
+                    color: #324b4b;
+                }
+
+                .forgot-password {
+                    font: 400 14px $font-beVietnam-regular;
+                    color: #dfeeee;
+                    line-height: 24px;
+                    float: right;
+                }
+
+                .signin-button {
+                    cursor: pointer;
+                    font: 400 20px $font-beVietnam-bold;
+                    line-height: 28px;
+                    letter-spacing: 2px;
+                    width: 80%;
+                    height: 52px;
+                    border-radius: 8px;
+                    margin-top: 20px;
+                    margin-bottom: 40px;
+                    background-color: #008b68;
+                    color: white;
+                    border: unset;
+
+                    &:hover,
+                    &:focus {
+                        border: unset;
+                    }
+                }
+            }
+
+            .or-signup-using {
+                color: #324b4b;
+                text-align: center;
+                margin-bottom: 4px;
+                font: 12px $font-beVietnam-bold;
+            }
+
+            .app-social {
+                display: flex;
+                justify-content: center;
+
+                .logo-img {
+                    width: 32px;
+                }
+
+                .app-social-item {
+                    margin: 4px;
+                }
+            }
+        }
+    }
+}
