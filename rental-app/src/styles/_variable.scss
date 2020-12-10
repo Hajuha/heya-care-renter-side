@@ -1,0 +1,21 @@
+$font-beVietnam-bold: 'beVietnam-Bold';
+$font-beVietnam-medium: 'beVietnam-Medium';
+$font-beVietnam-regular: 'beVietnam-Regular';
+$font-beVietnam-thin: 'beVietnam-SemiBold';
+
+@font-face {
+    font-family: $font-beVietnam-bold;
+    src: url('../assets/fonts/BeVietnam-Bold.ttf');
+}
+@font-face {
+    font-family: $font-beVietnam-medium;
+    src: url('../assets/fonts/BeVietnam-Medium.ttf');
+}
+@font-face {
+    font-family: $font-beVietnam-regular;
+    src: url('../assets/fonts/BeVietnam-Regular.ttf');
+}
+@font-face {
+    font-family: $font-beVietnam-thin;
+    src: url('../assets/fonts/BeVietnam-Thin.ttf');
+}

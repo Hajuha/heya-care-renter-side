@@ -1,0 +1,10 @@
+@import './variable';
+
+body {
+    font-family: $font-beVietnam-regular;
+    background-color: #E2F1F1;
+}
+
+::-webkit-scrollbar {
+    width: 0rem;
+}
