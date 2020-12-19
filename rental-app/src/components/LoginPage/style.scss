@@ -27,24 +27,24 @@
     }
 
     .form-container {
-        width: 500px;
-        border-radius: 10px;
+        width: (500rem/24);
+        border-radius: (10rem/24);
         overflow: hidden;
-        padding: 10px 20px 10px 20px;
+        padding: (10rem/24) (20rem/24) (10rem/24) (20rem/24);
         background: rgba(62, 193, 155, 0.85);
 
         &-logo {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 200px;
-            height: 200px;
+            width: (200rem/24);
+            height: (200rem/24);
         }
 
         &-title {
             font-family: $font-beVietnam-bold;
             font-weight: 1000;
-            font-size: 40px;
+            font-size: (40rem/24);
             color: #fff;
             text-transform: uppercase;
             display: flex;
@@ -52,7 +52,7 @@
             justify-content: center;
             align-items: center;
             height: 100%;
-            padding-left: 28px;
+            padding-left: (28rem/24);
 
             .text {
                 align-self: flex-start;
@@ -62,7 +62,7 @@
 
         .ant-form {
             width: 100%;
-            padding: 36px 90px 0px 90px;
+            padding: (36rem/24) (90rem/24) 0px (90rem/24);
 
             .ant-form-item {
                 justify-content: center;
@@ -71,18 +71,18 @@
                 margin-bottom: 0px;
 
                 .ant-input {
-                    font: 400 18px $font-beVietnam-regular;
-                    height: 48px;
-                    padding: 12px 20px;
+                    font: 400 (18rem/24) $font-beVietnam-regular;
+                    height: (48rem/24);
+                    padding: (12rem/24) (20rem/24);
                     border-radius: 6px;
                     box-shadow: none;
                     border-width: 0px;
-                    margin-bottom: 36px;
+                    margin-bottom: (36rem/24);
                 }
 
                 .ant-input-affix-wrapper {
-                    padding: 0rem 12px 0rem 0rem;
-                    margin-bottom: 36px;
+                    padding: 0rem (12rem/24) 0rem 0rem;
+                    margin-bottom: (36rem/24);
                     border-radius: 6px;
                     border-width: 0px;
 
@@ -93,36 +93,36 @@
                 }
 
                 .ant-form-item-explain-error {
-                    font: 16px $font-beVietnam-regular;
-                    margin-top: -32px;
-                    margin-bottom: 12px;
+                    font: (16rem/24) $font-beVietnam-regular;
+                    margin-top: -(32rem/24);
+                    margin-bottom: (12rem/24);
                     color: #324b4b;
                 }
 
                 .ant-checkbox-wrapper {
-                    margin-top: -30px;
-                    font: 14px $font-beVietnam-regular;
+                    margin-top: -(30rem/24);
+                    font: (14rem/24) $font-beVietnam-regular;
                     float: left;
                     color: #324b4b;
                 }
 
                 .forgot-password {
-                    font: 400 14px $font-beVietnam-regular;
+                    font: 400 (14rem/24) $font-beVietnam-regular;
                     color: #dfeeee;
-                    line-height: 24px;
+                    line-height: (24rem/24);
                     float: right;
                 }
 
                 .signin-button {
                     cursor: pointer;
-                    font: 400 20px $font-beVietnam-bold;
-                    line-height: 28px;
+                    font: 400 (20rem/24) $font-beVietnam-bold;
+                    line-height: (28rem/24);
                     letter-spacing: 2px;
                     width: 80%;
-                    height: 52px;
+                    height: (52rem/24);
                     border-radius: 8px;
-                    margin-top: 20px;
-                    margin-bottom: 40px;
+                    margin-top: (20rem/24);
+                    margin-bottom: (40rem/24);
                     background-color: #008b68;
                     color: white;
                     border: unset;
@@ -138,7 +138,7 @@
                 color: #324b4b;
                 text-align: center;
                 margin-bottom: 4px;
-                font: 12px $font-beVietnam-bold;
+                font: (12rem/24) $font-beVietnam-bold;
             }
 
             .app-social {
@@ -146,7 +146,7 @@
                 justify-content: center;
 
                 .logo-img {
-                    width: 32px;
+                    width: (32rem/24);
                 }
 
                 .app-social-item {

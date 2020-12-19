@@ -1,7 +1,7 @@
 $font-beVietnam-bold: 'beVietnam-Bold';
 $font-beVietnam-medium: 'beVietnam-Medium';
 $font-beVietnam-regular: 'beVietnam-Regular';
-$font-beVietnam-thin: 'beVietnam-SemiBold';
+$font-beVietnam-thin: 'beVietnam-Thin';
 
 @font-face {
     font-family: $font-beVietnam-bold;
@@ -19,3 +19,5 @@ $font-beVietnam-thin: 'beVietnam-SemiBold';
     font-family: $font-beVietnam-thin;
     src: url('../assets/fonts/BeVietnam-Thin.ttf');
 }
+
+$color-pink: #F55086;

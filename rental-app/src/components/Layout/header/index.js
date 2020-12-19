@@ -1,6 +1,6 @@
 import { Col, Input, Row, Select } from 'antd';
-import { Option } from 'antd/lib/mentions';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../../../assets/icons/header-logo.svg';
 import './style.scss';
 
@@ -28,16 +28,16 @@ const AppHeader = () => {
 
     const selectBefore = (
         <Select defaultValue='HN' className='select-before'>
-            <Option value='HN'>HN</Option>
-            <Option value='TP.HCM'>TP.HCM</Option>
+            <Select.Option value='HN'>Hà Nội</Select.Option>
+            <Select.Option value='hcm'>Hà Nộiiiii</Select.Option>
         </Select>
     );
 
     return (
         <React.Fragment>
             <div className={navbarClasses.join(' ')}>
-                <Row align='middle'>
-                    <Col span={6}>
+                <Row align='middle' justify='center'>
+                    <Col md={6} offset={{ sm: '0', md: '2' }}>
                         <a className='logo' href='/'>
                             <img
                                 alt='logo'
@@ -45,15 +45,17 @@ const AppHeader = () => {
                                 src={Logo}></img>
                         </a>
                     </Col>
-                    <Col span={12}>
+                    <Col md={13}>
                         <div className='search-bar'>
                             <Input.Search
                                 addonBefore={selectBefore}
                                 placeholder='Tìm kiếm theo địa điểm, quận, tên đường,...'></Input.Search>
                         </div>
                     </Col>
-                    <Col span={6}>
-                        <div className='user-field'></div>
+                    <Col md={3}>
+                        <a href='/login'>
+                            <span className='login'>Sign In</span>
+                        </a>
                     </Col>
                 </Row>
             </div>
