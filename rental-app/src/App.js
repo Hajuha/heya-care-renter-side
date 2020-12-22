@@ -5,6 +5,7 @@ import Result from './pages/Result';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import './styles/app.scss';
+import 'font-awesome/css/font-awesome.min.css';
 import AppHeader from './components/Layout/header';
 import Room from './pages/Room';
 

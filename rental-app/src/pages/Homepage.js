@@ -1,57 +1,8 @@
 import * as React from 'react';
-import { Typography } from 'antd'
+import HomePage from '../components/HomePage';
 
 const Homepage = () => {
-    return <React.Fragment> 
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-        <Typography.Title> Hello </Typography.Title>
-    </React.Fragment>;
+    return <HomePage />;
 };
 
 export default Homepage;

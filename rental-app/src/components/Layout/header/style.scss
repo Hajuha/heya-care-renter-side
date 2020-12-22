@@ -1,30 +1,109 @@
 @import '../../../styles/variable';
 
+.ant-select-item-option-selected {
+    background-color: #ffffff !important;
+}
 .app-header {
     position: absolute;
     top: 0;
     width: 100%;
     z-index: 2;
-    background-color: #ffffff;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
-    height: 80px;
+    background-color: #fc5185;
+    box-shadow: 0 2px 8px 0 rgba(85, 82, 115, 0.3);
+    height: auto;
+    min-height: (80rem/24);
 
     .ant-row {
-        height: 100%;
+        height: (80rem/24);
     }
     .logo {
         height: auto;
         display: flex;
-        margin-left: 20px;
+        margin-left: (20rem/24);
         .logo-img {
             display: block;
-            margin-left: 30px;
-            width: 200px;
+            margin-left: (30rem/24);
+            width: (200rem/24);
         }
     }
+
+    .ant-input-group-wrapper {
+        width: 60%;
+        background-color: #ffffff;
+        border-radius: (20rem/24) !important;
+        .ant-input {
+            font-size: (14rem/24);
+            line-height: (24rem/24);
+            padding: (12rem/24) (22rem/24);
+        }
+
+        .ant-input-group-addon {
+            border: none !important;
+            left: (12rem/24) !important;
+            background-color: transparent !important;
+        }
+
+        .ant-input-group {
+            border: none !important;
+
+            input {
+                height: rem((40rem/24));
+                padding: (12rem/24) (22rem/24) (12rem/24) (44rem/24);
+                border: 0px !important;
+                box-shadow: none !important;
+
+                z-index: 1;
+
+                &::placeholder {
+                    font-size: (14rem/24);
+                    line-height: (24rem/24);
+                }
+            }
+        }
+
+        .ant-select-focused {
+            color: black;
+        }
+
+        button {
+            border: 0px !important;
+            height: 100%;
+            z-index: 2;
+            left: -(20rem/24);
+            background-color: transparent;
+
+            &.ant-input-search-button {
+                color: black !important;
+            }
+
+            span.anticon.anticon-search {
+                height: (16rem/24);
+                width: (16rem/24);
+
+                svg {
+                    height: (16rem/24);
+                    width: (16rem/24);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 536px) {
+        .search-bar {
+            display: none;
+        }
+    }
+    .login {
+        color: white;
+        font-size: 1rem;
+        font-family: $font-beVietnam-medium;
+
+    }
 }
+
 .scrolled {
     position: fixed;
     top: 0;
     box-shadow: black;
+    width: 100%;
 }

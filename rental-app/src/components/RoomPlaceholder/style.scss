@@ -1,0 +1,69 @@
+@import '../../styles/variable';
+
+.room-placeholder {
+    color: black;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    padding-right: 0;
+
+    &-image {
+        height: (150rem/24);
+        width: (210rem/24);
+        border-radius: 0.5rem;
+    }
+
+    .room-info {
+        width: 100%;
+        margin-left: 0.5rem;
+        font-size: 0.75rem;
+
+        .informations {
+            margin-top: 0.5rem;
+            .column {
+                flex-direction: column;
+                align-items: center;
+                justify-content: start;
+            }
+            .unit {
+                margin-left: 0.5rem;
+            }
+
+            .info {
+                margin-bottom: 0.75rem;
+            }
+        }
+        .title {
+            margin: auto;
+            font-size: (28rem/24);
+            font-family: $font-beVietnam-medium;
+        }
+
+        .icon {
+            color: #c89696;
+            font-size: 0.75rem;
+        }
+    }
+
+    .price {
+        color: $color-pink;
+        font-size: 1rem;
+        display: flex;
+        position: absolute;
+        top: -0.5rem;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        .price_ {
+            margin: auto;
+            font-size: (52rem/24);
+            font-family: $font-beVietnam-medium;
+        }
+        .unit {
+            margin: auto;
+        }
+    }
+}
