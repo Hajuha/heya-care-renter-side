@@ -17,6 +17,7 @@ const RoomPlaceholder = (props) => {
     const price_in_million = Room.price / 1000000;
     console.log(price_in_million);
     const path = `/room/${Room.id}`;
+    
     return (
         <React.Fragment>
             <a href={path}>
