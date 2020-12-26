@@ -8,6 +8,7 @@ import './styles/app.scss';
 import 'font-awesome/css/font-awesome.min.css';
 import AppHeader from './components/Layout/header';
 import Room from './pages/Room';
+require('dotenv').config();
 
 const App = () => {
     return (

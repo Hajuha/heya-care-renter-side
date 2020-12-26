@@ -1,6 +1,12 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import SwiperCore, {
+    Navigation,
+    Pagination,
+    Scrollbar,
+    A11y,
+    Autoplay,
+} from 'swiper';
 import { Breadcrumb, Card, Col, List, Row, Typography } from 'antd';
 import { HomeFilled, UserOutlined } from '@ant-design/icons';
 import StarRatings from 'react-star-ratings';
@@ -11,12 +17,14 @@ import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import './style.scss';
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 const MAPTILER_ACCESS_TOKEN = 'zbUgtIA4VLEBWqVtl2jt';
 const MAP_ID = 'basic';
 
 const RoomPage = (props) => {
     const { id } = props;
+    
+    const coordinate = [21.0316116,105.7928338]
 
     const nearLocation = [
         'Dai hoc Quoc gia Ha Noi',
@@ -24,7 +32,6 @@ const RoomPage = (props) => {
         'Dai hoc Thuong mai',
         'Nga tu Mai dich',
     ];
-
     const [scrolled, setScrolled] = React.useState(false);
 
     const handleScroll = () => {
@@ -106,6 +113,10 @@ const RoomPage = (props) => {
                     <Col sm={24} xl={{ span: 16, pull: 8 }}>
                         <Swiper
                             spaceBetween={0}
+                            autoplay={{
+                                delay: 1500,
+                                disableOnInteraction: false,
+                            }}
                             loop={true}
                             slidesPerView={1}
                             navigation={{ clickable: true }}
@@ -250,13 +261,12 @@ const RoomPage = (props) => {
                                 />
                                 <div className='map-container'>
                                     <Map
-                                        center={[21.028511, 105.804817]}
-                                        defaultZoom={15}
+                                        center={coordinate}
+                                        defaultZoom={16}
                                         provider={mapTilerProvider}>
-                                            
                                         <Marker
-                                            anchor={[21.028511, 105.804817]}
-                                            height={80 }
+                                            anchor={coordinate}
+                                            height={60}
                                             color='#fc5185'
                                             payload={1}
                                             onClick={({

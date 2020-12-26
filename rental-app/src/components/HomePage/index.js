@@ -3,6 +3,7 @@ import { Row, Col, Typography, Card } from 'antd';
 import RoomPlaceholder from '../RoomPlaceholder';
 import Image from '../../assets/images/phong-tro-2.jpg';
 import './style.scss';
+import HeyaCareClient from '../../services/apis/request';
 const HomePage = (props) => {
     const room = {
         owner: {
@@ -24,6 +25,8 @@ const HomePage = (props) => {
         electricity_price: 4000,
         water_price: 50000,
     };
+    const rooms = HeyaCareClient.get('/address/city');
+    console.log(rooms);
     return (
         <React.Fragment>
             <div className='home-page'>
@@ -36,7 +39,9 @@ const HomePage = (props) => {
                     </Col>
                     <Col span={8}>
                         <Card style={{ width: '100%' }}>
-                            <Typography.Title level={4}>Top Trending</Typography.Title>
+                            <Typography.Title level={4}>
+                                Top Trending
+                            </Typography.Title>
                         </Card>
                     </Col>
                 </Row>
