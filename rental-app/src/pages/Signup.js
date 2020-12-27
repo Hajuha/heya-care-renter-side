@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Typography } from 'antd'
+import { Typography } from 'antd';
+import SignupPage from '../components/SignupPage';
 
 const Signup = () => {
-    return <React.Fragment> 
-        <Typography.Title> Hello </Typography.Title>
-    </React.Fragment>;
+    return <SignupPage />;
 };
 
 export default Signup;
