@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {
     Navigation,
@@ -7,24 +7,55 @@ import SwiperCore, {
     A11y,
     Autoplay,
 } from 'swiper';
-import { Breadcrumb, Card, Col, List, Row, Typography } from 'antd';
-import { HomeFilled, UserOutlined } from '@ant-design/icons';
-import StarRatings from 'react-star-ratings';
-import { Map, Marker } from 'pigeon-maps';
-import IMAGE from '../../assets/images/phong-tro-2.jpg';
+import { Breadcrumb, Card, Col, Row, Spin, Tag, Typography } from 'antd';
+import {
+    HomeFilled,
+    UserOutlined,
+    RocketFilled,
+    EditFilled,
+    ArrowUpOutlined,
+} from '@ant-design/icons';
+import roomAPI from '../../services/apis/room';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import './style.scss';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
-const MAPTILER_ACCESS_TOKEN = 'zbUgtIA4VLEBWqVtl2jt';
-const MAP_ID = 'basic';
 
 const RoomPage = (props) => {
+    let [room, setRoom] = useState([]);
+    let [isLoading, setIsLoading] = useState(true);
+
+    const [showScroll, setShowScroll] = useState(false);
+
+    const checkScrollTop = () => {
+        if (!showScroll && window.pageYOffset > 400) {
+            setShowScroll(true);
+        } else if (showScroll && window.pageYOffset <= 400) {
+            setShowScroll(false);
+        }
+    };
+
+    const scrollTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    window.addEventListener('scroll', checkScrollTop);
+
     const { id } = props;
-    
-    const coordinate = [21.0316116,105.7928338]
+
+    let coordinate = [];
+
+    useEffect(() => {
+        getRoom();
+    }, []);
+
+    const getRoom = () => {
+        roomAPI.get('ce8acec3-4e2c-437f-a608-119aa140df18').then((res) => {
+            setRoom(res.data);
+            setIsLoading(false);
+        });
+    };
 
     const nearLocation = [
         'Dai hoc Quoc gia Ha Noi',
@@ -52,41 +83,33 @@ const RoomPage = (props) => {
     if (scrolled) {
         navbarClasses.push('card-scroll');
     }
+    const ratingChanged = (rating) => {};
 
-    function mapTilerProvider(x, y, z, dpr) {
-        return `https://api.maptiler.com/maps/${MAP_ID}/256/${z}/${x}/${y}${
-            dpr >= 2 ? '@2x' : ''
-        }.png?key=${MAPTILER_ACCESS_TOKEN}`;
+    if (isLoading) {
+        return <Spin className='app-spinner' />;
     }
 
-    const ratingChanged = (rating) => {
-        console.log(rating);
-    };
+    const { images, owner, nearby_locations } = room;
 
     return (
         <React.Fragment>
             <div className='room-page'>
                 <Breadcrumb>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        <a href='/'>Hà Nội</a>
+                        <a href='/'>Trang chủ</a>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        <a href='/'>Đống Đa</a>
+                        <a href='/'>{room.city.name}</a>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item>Nam Đồng</Breadcrumb.Item>
+                    <Breadcrumb.Item>
+                        <a href='/'>{room.district.name}</a>
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Item>
+                        <a href='/'>{room.ward.name}</a>
+                    </Breadcrumb.Item>
                 </Breadcrumb>
                 <div className='room-title'>
-                    <Typography.Title level={2}>
-                        HOMESTAY CAO CẤP CẠNH BÁCH-KINH-XÂY TRỌN GÓI 1,4TR/THÁNG{' '}
-                    </Typography.Title>
-                    <StarRatings
-                        starRatedColor='black'
-                        changeRating={ratingChanged}
-                        numberOfStars={5}
-                        name='rating'
-                        starDimension='32px'
-                    />
+                    <Typography.Title level={2}>{room.title}</Typography.Title>
                 </div>
                 <Row gutter={32}>
                     <Col sm={24} xl={{ span: 8, push: 16 }}>
@@ -100,12 +123,18 @@ const RoomPage = (props) => {
                                 </div>
                             }
                             className={navbarClasses.join(' ')}>
-                            <div>
+                            <div className='body'>
+                                <div
+                                    className='owner-avt'
+                                    style={{
+                                        backgroundImage:
+                                            'url(' + owner.avatar_url + ')',
+                                    }}></div>
                                 <Typography.Title level={4}>
-                                    Nguyễn Văn A
+                                    {owner.fullname}
                                 </Typography.Title>
                                 <Typography.Title level={5}>
-                                    0987666555
+                                    {owner.phone_number}
                                 </Typography.Title>
                             </div>
                         </Card>
@@ -120,39 +149,32 @@ const RoomPage = (props) => {
                             loop={true}
                             slidesPerView={1}
                             navigation={{ clickable: true }}
-                            pagination={{ clickable: true }}
-                            onSwiper={(swiper) => console.log(swiper)}
-                            onSlideChange={() => console.log('slide change')}>
-                            <SwiperSlide>
-                                <img
-                                    alt='img'
-                                    src={IMAGE}
-                                    className='img-slide'></img>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <img
-                                    alt='img'
-                                    src={IMAGE}
-                                    className='img-slide'></img>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <img
-                                    alt='img'
-                                    src={IMAGE}
-                                    className='img-slide'></img>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <img
-                                    alt='img'
-                                    src={IMAGE}
-                                    className='img-slide'></img>
-                            </SwiperSlide>
+                            pagination={{ clickable: true }}>
+                            {images.map((image, index) => {
+                                return (
+                                    <SwiperSlide key={index}>
+                                        <img
+                                            alt='img'
+                                            src={image}
+                                            className='img-slide'></img>
+                                    </SwiperSlide>
+                                );
+                            })}
                         </Swiper>
                     </Col>
                 </Row>
                 <div className='room-info'>
+                    <div
+                        className='scrollTop'
+                        onClick={scrollTop}
+                        style={{
+                            height: 40,
+                            display: showScroll ? 'flex' : 'none',
+                        }}>
+                        <ArrowUpOutlined className='icon' />
+                    </div>
                     <Row gutter={32}>
-                        <Col span={16}>
+                        <Col xl={16} span={24}>
                             <Card
                                 title={
                                     <div className='card-header room-info-card'>
@@ -167,39 +189,97 @@ const RoomPage = (props) => {
                                     justify='space-around'
                                     className='info-container'>
                                     <Col span={6}>
-                                        <div>GÍA PHÒNG</div>
-                                        <div>1,399,000 đồng</div>
+                                        <div
+                                            style={{
+                                                fontWeight: '600',
+                                            }}>
+                                            GÍA PHÒNG
+                                        </div>
+                                        <div>
+                                            {room.price?.toLocaleString()} đồng
+                                        </div>
                                     </Col>
                                     <Col span={6}>
-                                        <div>DIỆN TÍCH</div>
-                                        <div>130 mét vuông</div>
+                                        <div
+                                            style={{
+                                                fontWeight: '600',
+                                            }}>
+                                            DIỆN TÍCH
+                                        </div>
+                                        <div>{room.area}</div>
                                     </Col>
                                     <Col span={6}>
-                                        <div>ĐẶT CỌC</div>
-                                        <div>1,399,000 đồng</div>
+                                        <div
+                                            style={{
+                                                fontWeight: '600',
+                                            }}>
+                                            Ở CHUNG CHỦ
+                                        </div>
+                                        <div>
+                                            {room.is_stay_with_the_owner
+                                                ? 'Có'
+                                                : 'Không'}
+                                        </div>
                                     </Col>
                                     <Col span={6}>
-                                        <div>SỨC CHỨA</div>
+                                        <div
+                                            style={{
+                                                fontWeight: '600',
+                                            }}>
+                                            SỨC CHỨA
+                                        </div>
                                         <div>5 người</div>
                                     </Col>
                                 </Row>
 
                                 <Row className='info-container'>
                                     <Col span={6}>
-                                        <div className='room-status'>
+                                        <div
+                                            className='room-status'
+                                            style={{
+                                                fontWeight: '600',
+                                            }}>
                                             TRẠNG THÁI
                                         </div>
-                                        <div>Còn chỗ</div>
+                                        <div>
+                                            {room.is_rented
+                                                ? 'Đã hết'
+                                                : 'Còn chỗ'}
+                                        </div>
+                                    </Col>
+
+                                    <Col span={6}>
+                                        <div
+                                            style={{
+                                                fontWeight: '600',
+                                            }}>
+                                            GIÁ ĐIỆN
+                                        </div>
+                                        <div>{room.electricity_price}</div>
+                                    </Col>
+                                    <Col span={6}>
+                                        <div
+                                            style={{
+                                                fontWeight: '600',
+                                            }}>
+                                            GIÁ NƯỚC
+                                        </div>
+                                        <div>{room.water_price}</div>
                                     </Col>
                                 </Row>
                                 <Row className='info-container'>
                                     <Col>
-                                        <div className='room-status'>
+                                        <div
+                                            className='room-status'
+                                            style={{
+                                                fontWeight: '600',
+                                            }}>
                                             ĐIẠ CHỈ
                                         </div>
                                         <div>
-                                            229 Phố vọng, Phường Đồng Tâm, Quận
-                                            Hai Bà Trưng, Hà Nội
+                                            {room.street_address}
+                                            {', '}
+                                            {room.address}
                                         </div>
                                     </Col>
                                 </Row>
@@ -209,77 +289,39 @@ const RoomPage = (props) => {
                                 title={
                                     <div className='card-header room-info-card'>
                                         <Typography.Title level={3}>
-                                            <HomeFilled className='icon' />
-                                            &nbsp;&nbsp;Thông tin phòng
+                                            <RocketFilled className='icon' />
+                                            &nbsp;&nbsp;Tiện ích
                                         </Typography.Title>
                                     </div>
                                 }
-                                className='room-information'></Card>
-                            <Card title='Mô tả' className='room-information'>
-                                <p>
-                                    (Dịch vụ Ở GHÉP tiết kiệm chi phí với những
-                                    tiện ích cao cấp ) * Địa chỉ: ngõ 229 Phố
-                                    Vọng. cách các trường lớn BÁCH – KINH – XÂY
-                                    chỉ 600m - Bạn đang là sinh viên? - Bạn là
-                                    người mới đi làm? Tất cả đều mong muốn được
-                                    sống trong một không gian hiện đại, đầy đủ
-                                    tiện nghi, môi trường sống dân trí cao, thời
-                                    gian đi lại thoải mái, và quan trọng là
-                                    không phát sinh chi phí Chúng tôi đã xây
-                                    dựng được căn hộ cho thuê phù hợp với các
-                                    bạn tại Số 229 Phố Vọng: - phòng NỮ 3 giường
-                                    tầng, WC khép kín - còn 2 slot giá
-                                    1.500.000/người/tháng - phòng NAM 3 giường
-                                    tầng, - còn 2 slot giá 1.400.000/người/tháng
-                                    Giá trên đã bao gồm TOÀN BỘ CÁC CHI PHÍ:
-                                    điện, nước sạch mạng internet, gas, vệ sinh
-                                    hàng tuần (cam kết không phát sinh chi phí)
-                                    Căn hộ nằm tại khu chung cư cao cấp đảm bảo
-                                    an ninh, sạch sẽ, thuận tiện giao thông, đầy
-                                    đủ tiện nghi chỉ việc xách quần áo đến ở ✨
-                                    Mỗi người có 2 tủ quần áo có khóa riêng ✨
-                                    Bếp, tủ bếp , nồi niêu bát đĩa ✨ Tủ lạnh ,
-                                    máy giặt , bình nóng lạnh, điều hòa, bồn tắm
-                                    nằm. ✨ Bình lọc nước uống tại vòi. Các bạn
-                                    quan tâm vui lòng liên hệ chính chủ để đi
-                                    xem nhà NÓI KHÔNG VỚI THU PHÍ ĐI XEM LH
-                                    CHÍNH CHỦ: (fb, zalo, viber, imessage)
-                                </p>
+                                className='room-information'>
+
+
+                            </Card>
+                            <Card
+                                title={
+                                    <div className='card-header room-info-card'>
+                                        <Typography.Title level={3}>
+                                            <EditFilled className='icon' />
+                                            &nbsp;&nbsp;Mô tả
+                                        </Typography.Title>
+                                    </div>
+                                }
+                                className='room-information'>
+                                <pre className='description'>
+                                    {room.description}
+                                </pre>
                             </Card>
                             <Card className='room-information'>
-                                <List
-                                    size='large'
-                                    header={
-                                        <Typography.Title level={4}>
-                                            Địa điểm lân cận:
-                                        </Typography.Title>
-                                    }
-                                    dataSource={nearLocation}
-                                    renderItem={(item) => (
-                                        <List.Item>{item}</List.Item>
-                                    )}
-                                />
-                                <div className='map-container'>
-                                    <Map
-                                        center={coordinate}
-                                        defaultZoom={16}
-                                        provider={mapTilerProvider}>
-                                        <Marker
-                                            anchor={coordinate}
-                                            height={60}
-                                            color='#fc5185'
-                                            payload={1}
-                                            onClick={({
-                                                event,
-                                                anchor,
-                                                payload,
-                                            }) => {}}
-                                        />
-                                    </Map>
-                                </div>
+                                {nearby_locations.map((location) => {
+                                    return (
+                                        <Tag>
+                                            <a href='/search'> {location}</a>
+                                        </Tag>
+                                    );
+                                })}
                             </Card>
                         </Col>
-                        <Col span={8}></Col>
                     </Row>
                 </div>
             </div>

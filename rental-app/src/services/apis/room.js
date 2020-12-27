@@ -36,10 +36,10 @@ export default {
             return res.data;
         }),
 
-    get: (data) =>
+    get: (id) =>
         axios({
             method: 'get',
-            url: `${server_endpoint}/apis/accommodation/search`,
+            url: `${server_endpoint}/accommodation/${id}`,
             headers: {
                 'Content-Type': 'application/json',
             },
