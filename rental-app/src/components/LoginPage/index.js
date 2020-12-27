@@ -9,17 +9,12 @@ import { Button, Form, Input, Checkbox, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { AuthHook } from '../../hooks';
+import { login } from '../../actions/auth';
 
 const LoginPage = () => {
-    const { login } = AuthHook.useAuth();
-
     const onFinish = (values) => {
         console.log('Success:', values);
-        // setCredential(values);
-        login(values.username, values.password).then(() => {
-            // Todo ...
-        });
+        login(values);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -135,6 +130,12 @@ const LoginPage = () => {
                             </div>
                         </div>
                     </Form>
+                    <div className='text-align-center'>
+                        <p className='signin-guide'>
+                            {'Chưa có tài khoản?'}&nbsp;
+                            <a href='/register'>{'Đăng ký ngay'}</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </React.Fragment>

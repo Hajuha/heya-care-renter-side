@@ -1,0 +1,23 @@
+@import '../../../styles/variable';
+
+.field-wrapper {
+    margin-bottom: 0;
+}
+
+.inputField {
+    border-radius: (4rem/24);
+    padding: (12rem/24) (20rem/24);
+    margin-bottom: (8rem/24);
+    border: (2rem/24) solid transparent;
+
+    &:focus,
+    &:hover {
+        border-color: black;
+        box-shadow: none;
+    }
+
+    &::placeholder {
+        color: $color-gray;
+        font-weight: $fw-normal;
+    }
+}

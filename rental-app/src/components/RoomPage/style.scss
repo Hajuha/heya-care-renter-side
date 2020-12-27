@@ -1,3 +1,5 @@
+@import '../../styles/variable';
+
 .room-page {
     margin: (80rem/24) (200rem/24);
     padding-top: (20rem/24);
@@ -8,7 +10,7 @@
 
         .swiper-wrapper {
             margin-bottom: (16rem/24) !important;
-
+            max-height: 25rem;
             .swiper-slide {
                 display: flex !important;
                 background-color: #8783a7;
@@ -36,7 +38,12 @@
         color: #8783a7;
     }
 
+    .room-info {
+        margin-top: 1rem !important;
+    }
+
     .room-title {
+        margin: 1rem 0;
         display: flex;
         align-items: flex-end;
     }
@@ -44,8 +51,16 @@
     .room-information {
         border-radius: (12rem/24);
         margin-bottom: (24rem/24);
+        font-family: $font-beVietnam-regular;
+        font-size: 0.75rem;
+
         .info-container {
             margin-bottom: (18rem/24);
+        }
+
+        .description {
+            white-space: pre-wrap;
+            font-family: $font-beVietnam-regular;
         }
     }
 
@@ -66,6 +81,61 @@
 
     .map-container {
         width: 100%;
-        height: 10rem;
+        height: 12rem;
     }
+
+    .owner-info {
+        width: 20rem;
+
+        .body {
+            display: flex;
+            .owner-avt {
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: cover;
+                width: 80px;
+                height: 80px;
+                border-radius: 0.5rem;
+                margin-right: 1rem;
+                border: 2px solid #fff;
+                box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, 0.05);
+            }
+        }
+    }
+
+    .scrollTop {
+        width: 100%;
+        position: fixed !important;
+        bottom: 20px;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        cursor: pointer;
+        animation: fadeIn 0.3s;
+        transition: opacity 0.4s;
+        opacity: 0.5;
+        
+        
+
+        .icon {
+            margin: auto;
+            border-radius: 50%;
+            font-size: 48px;
+            color: white;
+            background-color: black;
+        }
+      }
+      
+      .scrollTop:hover{
+        opacity: 1;
+      }
+      
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0.5;
+        }
+      }
 }

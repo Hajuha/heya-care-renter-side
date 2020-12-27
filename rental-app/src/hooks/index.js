@@ -1,1 +1,0 @@
-export * as AuthHook from './auth';
