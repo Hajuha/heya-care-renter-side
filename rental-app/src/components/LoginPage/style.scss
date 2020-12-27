@@ -26,6 +26,19 @@
         background-color: rgba(101, 251, 210, 0.1);
     }
 
+    .signin-guide {
+        margin: auto;
+        text-align: center;
+        margin-bottom: 0;
+        padding-top: 1rem;
+        font: $fw-medium 0.75rem $font-beVietnam-medium;
+        color: #324b4b;
+        a {
+            color: #324b4b !important;
+            font: $fw-medium 0.75rem $font-beVietnam-bold;
+        }
+    }
+
     .form-container {
         width: (500rem/24);
         border-radius: (10rem/24);
