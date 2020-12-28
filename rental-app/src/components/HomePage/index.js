@@ -1,52 +1,70 @@
-import * as React from 'react';
-import { Row, Col, Typography, Card } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Typography, Card, Spin } from 'antd';
 import RoomPlaceholder from '../RoomPlaceholder';
-import Image from '../../assets/images/phong-tro-2.jpg';
 import './style.scss';
-import HeyaCareClient from '../../services/apis/request';
+import roomAPI from '../../services/apis/room';
+import { ArrowUpOutlined } from '@ant-design/icons';
 const HomePage = (props) => {
-    const room = {
-        owner: {
-            name: 'Nguyen Van A',
-            mobile_number: '0978655332',
-        },
-        image: Image,
-        id: 'abcdhsuw2',
-        title: 'Phòng trọ sinh viên giá rẻ nhiều tiện ích',
-        street_address: 'So 79, ngo 59, Khuc Thua Du',
-        ward: 'Dich Vong',
-        district: 'Cau Giay',
-        type: 'Phong tro',
-        price: 1900000,
-        area: '30',
-        is_stay_with_owner: true,
-        has_electric_water_heater: true,
-        has_air_conditioning: true,
-        electricity_price: 4000,
-        water_price: 50000,
+    let [rooms, setRooms] = useState([]);
+    let [isLoading, setIsLoading] = useState(true);
+
+    const [showScroll, setShowScroll] = useState(false);
+
+    const checkScrollTop = () => {
+        if (!showScroll && window.pageYOffset > 400) {
+            setShowScroll(true);
+        } else if (showScroll && window.pageYOffset <= 400) {
+            setShowScroll(false);
+        }
     };
-    const rooms = HeyaCareClient.get('/address/city');
-    console.log(rooms);
+
+    const scrollTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('scroll', checkScrollTop);
+
+    useEffect(() => {
+        getRooms();
+    }, []);
+
+    const getRooms = () => {
+        roomAPI.getAll().then((res) => {
+            setRooms(res.data.accommodations);
+            setIsLoading(false);
+        });
+    };
+
+    if (isLoading) {
+        return <Spin className='app-spinner' />;
+    }
+    
     return (
-        <React.Fragment>
-            <div className='home-page'>
-                <Row gutter={32}>
-                    <Col span={16}>
-                        <RoomPlaceholder room={room} />
-                        <RoomPlaceholder room={room} />
-                        <RoomPlaceholder room={room} />
-                        <RoomPlaceholder room={room} />
-                    </Col>
-                    <Col span={8}>
-                        <Card style={{ width: '100%' }}>
-                            <Typography.Title level={4}>
-                                Top Trending
-                            </Typography.Title>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-        </React.Fragment>
+        <div className='home-page'>
+            <Row gutter={32}>
+                <div
+                    className='scrollTop'
+                    onClick={scrollTop}
+                    style={{
+                        height: 40,
+                        display: showScroll ? 'flex' : 'none',
+                    }}>
+                    <ArrowUpOutlined className='icon' />
+                </div>
+                <Col span={16}>
+                    {rooms.map((room, index) => (
+                        <RoomPlaceholder key={index} Room={room} />
+                    ))}
+                </Col>
+                <Col span={8}>
+                    <Card style={{ width: '100%' }}>
+                        <Typography.Title level={4}>
+                            Top Trending
+                        </Typography.Title>
+                    </Card>
+                </Col>
+            </Row>
+        </div>
     );
 };
 

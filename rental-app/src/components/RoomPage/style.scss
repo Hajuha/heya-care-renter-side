@@ -62,6 +62,26 @@
             white-space: pre-wrap;
             font-family: $font-beVietnam-regular;
         }
+
+        .utility {
+            display: flex;
+            align-items: center;
+
+            .icon {
+                width: 2rem;
+                height: 2rem;
+                margin-right: 0.25rem;
+            }
+        }
+
+        .utility.show {
+            color: $color-pink;
+            font-family: $font-beVietnam-medium;
+        }
+
+        .utility.hidden {
+            color: #E2F1F1;
+        }
     }
 
     .card-header {
@@ -114,8 +134,6 @@
         animation: fadeIn 0.3s;
         transition: opacity 0.4s;
         opacity: 0.5;
-        
-        
 
         .icon {
             margin: auto;
@@ -124,18 +142,18 @@
             color: white;
             background-color: black;
         }
-      }
-      
-      .scrollTop:hover{
+    }
+
+    .scrollTop:hover {
         opacity: 1;
-      }
-      
-      @keyframes fadeIn {
+    }
+
+    @keyframes fadeIn {
         0% {
-          opacity: 0;
+            opacity: 0;
         }
         100% {
-          opacity: 0.5;
+            opacity: 0.5;
         }
-      }
+    }
 }

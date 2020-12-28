@@ -3,14 +3,18 @@
 .room-placeholder {
     color: black;
     cursor: pointer;
-    
+
     width: 100%;
     background-color: white;
     // border-radius: 0.5rem;
     // padding: 0.5rem;
     padding: 1rem;
-    border-bottom: 1px solid #CDCDCD;
-
+    border-bottom: 1px solid #cdcdcd;
+    .image-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
     &-image {
         height: (150rem/24);
         width: (210rem/24);
@@ -19,8 +23,10 @@
 
     .room-info {
         width: 100%;
-        margin-left: 0.5rem;
+        margin-left: 1rem;
         font-size: 0.75rem;
+        display: flex;
+        align-items: center;
 
         .informations {
             margin-top: 0.5rem;
@@ -28,13 +34,6 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: start;
-            }
-            .unit {
-                margin-left: 0.5rem;
-            }
-
-            .info {
-                margin-bottom: 0.75rem;
             }
         }
         .title {
@@ -47,24 +46,27 @@
             color: #c89696;
             font-size: 0.75rem;
         }
+
+        .unit {
+            margin-left: 0.5rem;
+        }
+
+        .info {
+            margin-bottom: 0.75rem;
+        }
     }
 
     .price {
+        height: 100%;
         color: $color-pink;
         font-size: 1rem;
         display: flex;
-        position: absolute;
-        top: -0.5rem;
         flex-direction: column;
         justify-content: center;
-        margin: auto;
+        align-items: center;
         .price_ {
-            margin: auto;
             font-size: (52rem/24);
             font-family: $font-beVietnam-medium;
-        }
-        .unit {
-            margin: auto;
         }
     }
 }

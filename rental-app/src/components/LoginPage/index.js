@@ -10,6 +10,7 @@ import 'antd/dist/antd.css';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { login } from '../../actions/auth';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
     const onFinish = (values) => {
@@ -114,7 +115,7 @@ const LoginPage = () => {
                                     className='google-button ant-btn'
                                     clientId='googleAPIKey'
                                     render={(renderProps) => (
-                                        <a
+                                        <Link
                                             onClick={renderProps.onClick}
                                             disabled={renderProps.disabled}>
                                             <img
@@ -122,7 +123,7 @@ const LoginPage = () => {
                                                 className='logo-img'
                                                 src={GoogleIcon}
                                             />
-                                        </a>
+                                        </Link>
                                     )}
                                     cookiePolicy={'single_host_origin'}
                                     icon={false}
@@ -133,7 +134,7 @@ const LoginPage = () => {
                     <div className='text-align-center'>
                         <p className='signin-guide'>
                             {'Chưa có tài khoản?'}&nbsp;
-                            <a href='/register'>{'Đăng ký ngay'}</a>
+                            <Link to='/register'>{'Đăng ký ngay'}</Link>
                         </p>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Divider } from 'antd';
 import CustomInputField from '../elements/input-field';
 import './style.scss';
@@ -131,7 +131,7 @@ const SignupPage = () => {
                             <div className='text-align-center'>
                                 <p className='signup-guide'>
                                     {'Đã có tài khoản?'}&nbsp;
-                                    <a href='/login'>{'Đăng nhập'}</a>
+                                    <Link to='/login'>{'Đăng nhập'}</Link>
                                 </p>
                             </div>
                         </Col>

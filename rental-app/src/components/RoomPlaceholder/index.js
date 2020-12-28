@@ -9,33 +9,36 @@ import { Card, Col, Row, Typography } from 'antd';
 import * as React from 'react';
 
 import './style.scss';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 const RoomPlaceholder = (props) => {
-    const { room } = props;
+    const { Room } = props;
     const history = useHistory();
-    let [Room, setRoom] = React.useState(room);
+    // let [Room, setRoom] = React.useState(room);
     const price_in_million = Room.price / 1000000;
-    console.log(price_in_million);
+    // console.log(price_in_million);
     const path = `/room/${Room.id}`;
-    
     return (
         <React.Fragment>
-            <a href={path}>
+            <Link to={path}>
                 <div className='room-placeholder'>
-                    <Row>
+                    <Row align='center'>
                         <Col>
-                            <img
-                                alt=''
-                                src={Room.image}
-                                className='room-placeholder-image'
-                            />
+                            <div className='image-container'>
+                                <img
+                                    alt=''
+                                    src={Room.images[0].url}
+                                    className='room-placeholder-image'
+                                />
+                            </div>
                         </Col>
 
                         <Col span={18}>
                             <div className='room-info'>
-                                <span className='title'>{Room.title}</span>
                                 <Row>
                                     <Col span={20}>
+                                        <span className='title'>
+                                            {Room.title}
+                                        </span>
                                         <div className='informations'>
                                             <Row>
                                                 <Col span={12}>
@@ -48,21 +51,7 @@ const RoomPlaceholder = (props) => {
                                                                 }
                                                             />
                                                             <span className='unit'>
-                                                                {Room.ward}
-                                                            </span>
-                                                        </div>
-
-                                                        <div className='info'>
-                                                            <FontAwesomeIcon
-                                                                className='icon'
-                                                                icon={
-                                                                    faMapMarkedAlt
-                                                                }
-                                                            />
-                                                            <span className='unit'>
-                                                                {
-                                                                    Room.street_address
-                                                                }
+                                                                {Room.ward.name}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -81,6 +70,15 @@ const RoomPlaceholder = (props) => {
                                                 </Col>
                                             </Row>
                                         </div>
+                                        <div className='info'>
+                                            <FontAwesomeIcon
+                                                className='icon'
+                                                icon={faMapMarkedAlt}
+                                            />
+                                            <span className='unit'>
+                                                {Room.full_address}
+                                            </span>
+                                        </div>
                                     </Col>
 
                                     <Col span={3}>
@@ -97,7 +95,7 @@ const RoomPlaceholder = (props) => {
                         </Col>
                     </Row>
                 </div>
-            </a>
+            </Link>
         </React.Fragment>
     );
 };

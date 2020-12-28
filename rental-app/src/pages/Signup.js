@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Typography } from 'antd';
 import SignupPage from '../components/SignupPage';
 
-const Signup = () => {
+const Signup = (props) => {
     return <SignupPage />;
 };
 
