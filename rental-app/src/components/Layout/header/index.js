@@ -1,12 +1,13 @@
 import { Col, Input, Row, Select } from 'antd';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Logo from '../../../assets/icons/header-logo.svg';
+import { browserHistory } from '../../../helpers';
+
 import './style.scss';
 
-const AppHeader = () => {
+const AppHeader = (props) => {
     const [scrolled, setScrolled] = React.useState(false);
-
     const handleScroll = () => {
         const offset = window.scrollY;
         if (offset > 200) {
@@ -32,30 +33,38 @@ const AppHeader = () => {
             <Select.Option value='hcm'>Hà Nộiiiii</Select.Option>
         </Select>
     );
+    const searchRoom = (values) => {
+        browserHistory.push({
+            pathname: '/results/',
+            search: '?' + new URLSearchParams({ q: values }).toString(),
+        });
+        // window.location.reload();   
+    };
 
     return (
         <React.Fragment>
             <div className={navbarClasses.join(' ')}>
                 <Row align='middle' justify='center'>
                     <Col md={6} offset={{ sm: '0', md: '2' }}>
-                        <a className='logo' href='/'>
+                        <Link className='logo' to='/'>
                             <img
                                 alt='logo'
                                 className='logo-img'
                                 src={Logo}></img>
-                        </a>
+                        </Link>
                     </Col>
                     <Col md={13}>
                         <div className='search-bar'>
                             <Input.Search
+                                onSearch={searchRoom}
                                 addonBefore={selectBefore}
                                 placeholder='Tìm kiếm theo địa điểm, quận, tên đường,...'></Input.Search>
                         </div>
                     </Col>
                     <Col md={3}>
-                        <a href='/login'>
+                        <Link to='/login'>
                             <span className='login'>Sign In</span>
-                        </a>
+                        </Link>
                     </Col>
                 </Row>
             </div>

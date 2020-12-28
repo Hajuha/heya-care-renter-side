@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Typography } from 'antd';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import ResultPage from '../components/ResultPage';
 
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 const Result = () => {
-
-    let { id } = useParams()
-    return (
-        <React.Fragment>
-            <Typography.Title> {id} </Typography.Title>
-        </React.Fragment>
-    );
+    console.log('222222222');
+    let { searchQuery } = useQuery().get('q');
+    console.log('aaa', searchQuery);
+    return <ResultPage searchQuery={searchQuery} />;
 };
 
 export default Result;

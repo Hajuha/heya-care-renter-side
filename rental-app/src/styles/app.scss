@@ -2,7 +2,7 @@
 
 body {
     font-family: $font-beVietnam-regular;
-    background-color: #E2F1F1;
+    background-color: #e2f1f1;
 }
 
 ::-webkit-scrollbar {
@@ -10,13 +10,55 @@ body {
 }
 
 @media (min-width: 768px) {
-  :root {
-    font-size: calc(0.6rem + ((1vw - 7.68px) * 1.25));
-    min-height: 0vw;
-  }
+    :root {
+        font-size: calc(0.6rem + ((1vw - 7.68px) * 1.25));
+        min-height: 0vw;
+    }
 }
 @media (min-width: 1920px) {
-  :root {
-    font-size: 24px;
-  }
+    :root {
+        font-size: 24px;
+    }
+}
+
+.scrollTop {
+    width: 100%;
+    position: fixed !important;
+    bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: pointer;
+    animation: fadeIn 0.3s;
+    transition: opacity 0.4s;
+    opacity: 0.5;
+
+    .icon {
+        margin: auto;
+        border-radius: 50%;
+        font-size: 48px;
+        color: white;
+        background-color: black;
+    }
+}
+
+.scrollTop:hover {
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.ant-row {
+    width: 100%;
+}
+
+.app-spinner {
+    margin-top: 300px;
 }
