@@ -1,6 +1,6 @@
 import { Col, Input, Row, Select } from 'antd';
-import * as React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import Logo from '../../../assets/icons/header-logo.svg';
 import { browserHistory } from '../../../helpers';
 
@@ -8,6 +8,8 @@ import './style.scss';
 
 const AppHeader = (props) => {
     const [scrolled, setScrolled] = React.useState(false);
+    const location = useLocation();
+
     const handleScroll = () => {
         const offset = window.scrollY;
         if (offset > 200) {
@@ -16,6 +18,10 @@ const AppHeader = (props) => {
             setScrolled(false);
         }
     };
+
+    useEffect(() => {
+        console.log('ssss');
+    }, [location]);
 
     React.useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -38,7 +44,7 @@ const AppHeader = (props) => {
             pathname: '/results',
             search: '?' + new URLSearchParams({ q: values }).toString(),
         });
-        window.location.reload();   
+        window.location.reload();
     };
 
     return (

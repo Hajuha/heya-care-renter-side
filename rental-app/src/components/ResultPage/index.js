@@ -10,7 +10,6 @@ const ResultPage = (props) => {
     let [rooms, setRooms] = useState([]);
     let [isLoading, setIsLoading] = useState(true);
     let [filterOptions, setFilterOption] = useState(() => {
-        
         return { q: searchQuery };
     });
 
@@ -75,10 +74,40 @@ const ResultPage = (props) => {
                                         ...filterOptions,
                                         is_stay_with_the_owner: e.target.value,
                                     }));
-                                }}
-                                defaultValue={true}>
-                                <Radio value={false}>Không</Radio>
+                                }}>
                                 <Radio value={true}>Có</Radio>
+                                <Radio value={false}>Không</Radio>
+                            </Radio.Group>
+                        </div>
+                        <div>
+                            <Typography.Title level={5}>
+                                Có điều hòa
+                            </Typography.Title>
+                            <Radio.Group
+                                onChange={(e) => {
+                                    setFilterOption((filterOptions) => ({
+                                        ...filterOptions,
+                                        has_air_conditioning: e.target.value,
+                                    }));
+                                }}>
+                                <Radio value={true}>Có</Radio>
+                                <Radio value={false}>Không</Radio>
+                            </Radio.Group>
+                        </div>
+                        <div>
+                            <Typography.Title level={5}>
+                                Có bình nước nóng
+                            </Typography.Title>
+                            <Radio.Group
+                                onChange={(e) => {
+                                    setFilterOption((filterOptions) => ({
+                                        ...filterOptions,
+                                        has_electric_water_heater:
+                                            e.target.value,
+                                    }));
+                                }}>
+                                <Radio value={true}>Có</Radio>
+                                <Radio value={false}>Không</Radio>
                             </Radio.Group>
                         </div>
                     </Card>

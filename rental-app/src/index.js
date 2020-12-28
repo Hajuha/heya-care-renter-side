@@ -9,13 +9,11 @@ import reportWebVitals from './reportWebVitals';
 import { store, persistor } from './store';
 
 ReactDOM.render(
-    <Router>
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <App />
-            </PersistGate>
-        </Provider>
-    </Router>,
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
+    </Provider>,
     document.getElementById('root')
 );
 
