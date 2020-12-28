@@ -9,6 +9,7 @@ import { Card, Col, Row, Typography } from 'antd';
 import * as React from 'react';
 
 import './style.scss';
+import './responsive.scss';
 import { Link, useHistory } from 'react-router-dom';
 const RoomPlaceholder = (props) => {
     const { Room } = props;
@@ -22,7 +23,7 @@ const RoomPlaceholder = (props) => {
             <Link to={path}>
                 <div className='room-placeholder'>
                     <Row align='center'>
-                        <Col>
+                        <Col md={6} sm={24}>
                             <div className='image-container'>
                                 <img
                                     alt=''
@@ -32,7 +33,7 @@ const RoomPlaceholder = (props) => {
                             </div>
                         </Col>
 
-                        <Col span={18}>
+                        <Col md={18} sm={24}>
                             <div className='room-info'>
                                 <Row>
                                     <Col

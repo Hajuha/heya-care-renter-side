@@ -6,15 +6,16 @@
 
     width: 100%;
     background-color: white;
-    // border-radius: 0.5rem;
-    // padding: 0.5rem;
     padding: 1rem;
+
     border-bottom: 1px solid #cdcdcd;
+
     .image-container {
         display: flex;
         align-items: center;
         height: 100%;
     }
+
     &-image {
         height: (150rem/24);
         width: (210rem/24);
@@ -27,16 +28,20 @@
         font-size: 0.75rem;
         display: flex;
         align-items: center;
+        color: #666666;
 
         .informations {
             margin-top: 0.5rem;
+
             .column {
                 flex-direction: column;
                 align-items: center;
                 justify-content: start;
             }
         }
+
         .title {
+            color: black;
             margin: auto;
             font-size: 0.8rem;
             font-family: $font-beVietnam-medium;
@@ -64,6 +69,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         .price_ {
             font-size: 1.75rem;
             font-family: $font-beVietnam-medium;

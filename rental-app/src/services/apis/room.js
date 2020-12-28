@@ -26,6 +26,17 @@ export default {
             return res.data;
         }),
 
+    getTrendingRooms: () =>
+        axios({
+            method: 'get',
+            url: `${server_endpoint}/accommodation/top10-view`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => {
+            return res.data;
+        }),
+
     search: (data) =>
         axios({
             method: 'post',

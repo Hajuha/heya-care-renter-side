@@ -1,5 +1,16 @@
 @import '../../styles/variable';
 
+
+@media screen and (max-width: 575px) {
+    .signup-content {
+        padding: 7.5rem 0.5rem 1rem 0.5rem !important;
+    }
+
+    .signup-guide {
+        padding-top: 0.25rem !important;
+    }
+}
+
 .signup {
     width: 100%;
     height: 100%;
@@ -73,7 +84,7 @@
         margin: auto;
         text-align: center;
         margin-bottom: 0;
-        padding-top: (106rem/24);
+        padding-top: (80rem/24);
         font: $fw-medium 1rem $font-beVietnam-medium;
 
         a {
@@ -112,6 +123,7 @@
     flex-direction: column;
     text-align: center;
     background-color: white;
+
     .icon {
         font-size: 150px;
         color: $color-gray;
