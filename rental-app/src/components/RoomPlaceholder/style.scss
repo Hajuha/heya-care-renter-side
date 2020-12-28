@@ -38,13 +38,13 @@
         }
         .title {
             margin: auto;
-            font-size: (28rem/24);
+            font-size: 0.8rem;
             font-family: $font-beVietnam-medium;
         }
 
         .icon {
             color: #c89696;
-            font-size: 0.75rem;
+            font-size: 0.5rem;
         }
 
         .unit {
@@ -59,13 +59,13 @@
     .price {
         height: 100%;
         color: $color-pink;
-        font-size: 1rem;
+        font-size: 0.75rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         .price_ {
-            font-size: (52rem/24);
+            font-size: 1.75rem;
             font-family: $font-beVietnam-medium;
         }
     }

@@ -14,7 +14,7 @@ const RoomPlaceholder = (props) => {
     const { Room } = props;
     const history = useHistory();
     // let [Room, setRoom] = React.useState(room);
-    const price_in_million = Room.price / 1000000;
+    const price_in_million = (Room.price / 1000000).toFixed(1);
     // console.log(price_in_million);
     const path = `/room/${Room.id}`;
     return (
@@ -35,7 +35,9 @@ const RoomPlaceholder = (props) => {
                         <Col span={18}>
                             <div className='room-info'>
                                 <Row>
-                                    <Col span={20}>
+                                    <Col
+                                        span={20}
+                                        style={{ padding: '0 0.5rem' }}>
                                         <span className='title'>
                                             {Room.title}
                                         </span>
