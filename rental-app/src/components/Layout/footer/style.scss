@@ -1,0 +1,148 @@
+@import '../../../styles/variable';
+
+.footer-container {
+    align-self: flex-end;
+    position: relative;
+    width: 100wh;
+    height: auto;
+    background-color: $color-white;
+
+    .footer-left-side {
+        margin: (44rem/16) (32rem/16) 0 (32rem/16);
+
+        @media (min-width: 576px) {
+            margin: (44rem/16) (100rem/16) (50rem/16) (144rem/16);
+        }
+
+        .logo-img {
+            width: (150rem/16);
+            cursor: pointer;
+        }
+
+        .footer-title-container {
+            margin-top: (20rem/16);
+
+            .footer-title {
+                font-family: $font-beVietnam-medium;
+                font-weight: $fw-medium;
+                color: $color-black;
+                font-size: (18rem/16);
+                line-height: (28rem/16);
+            }
+        }
+
+        .footer-description-container {
+            margin-top: (8rem/16);
+            max-width: 100%;
+            display: inline-block;
+
+            .footer-description {
+                font-family: $font-beVietnam-regular;
+                font-weight: $fw-normal;
+                color: $color-black;
+                font-size: (12rem/16);
+                line-height: (20rem/16);
+            }
+        }
+
+        .social-connect {
+            margin-top: (20rem/16);
+
+            .logo-social {
+                margin-right: (12rem/16);
+                width: (32rem/16);
+            }
+        }
+    }
+
+    .footer-right-side {
+        margin: (32rem/16) (32rem/16) 0 (32rem/16);
+        display: flex;
+        flex-direction: column;
+
+        @media (min-width: 576px) {
+            margin: (72rem/16) (140rem/16) 0 (16rem/16);
+            flex-direction: unset;
+        }
+
+        .footer-menu {
+            display: inline-block;
+            vertical-align: top;
+
+            &-item {
+                margin-bottom: (16rem/16);
+                width: max-content;
+
+                &-text {
+                    font-family: $font-beVietnam-medium;
+                    font-weight: $fw-medium;
+                    color: $color-black !important;
+                    font-size: (14rem/16);
+                    line-height: (20rem/16);
+
+                    &:hover {
+                        color: $color-red !important;
+                        border-bottom: none !important;
+                    }
+
+                    &.ant-menu-item-selected {
+                        color: $color-red !important;
+                        border-bottom: none !important;
+                    }
+                }
+            }
+        }
+
+        .footer-info {
+            margin-left: 0;
+            margin-top: (32rem/16);
+            vertical-align: top;
+
+            @media (min-width: 576px) {
+                margin-top: unset;
+                margin-left: (136rem/16);
+            }
+
+            &-container {
+                margin: 0;
+
+                .footer-info-text {
+                    vertical-align: top;
+                    font-family: $font-beVietnam-medium;
+                    font-weight: $fw-medium;
+                    color: $color-black;
+                    font-size: (18rem/24);
+                    line-height: (20rem/16);
+                    margin-bottom: (16rem/16);
+
+                    &.email {
+                        text-decoration: underline !important;
+                    }
+
+                    &.address {
+                        font-family: $font-beVietnam-regular;
+                        font-weight: $fw-normal;
+                        color: $color-black;
+                        font-size: (16rem/24);
+                        line-height: (24rem/16);
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-end {
+        width: 100%;
+        height: (40rem/16);
+        background-color: rgba($color-pink, 0.9);
+        line-height: (40rem/16);
+        text-align: center;
+
+        .footer-copyright-text {
+            font-family: $font-beVietnam-regular;
+            font-weight: 500;
+            color: rgba($color-white, 0.72);
+            font-size: 0.75rem;
+        }
+    }
+}

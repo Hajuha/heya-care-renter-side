@@ -8,6 +8,7 @@ import SignupSuccess from './components/SignupPage/SignupSuccess.js';
 import './styles/app.scss';
 import 'font-awesome/css/font-awesome.min.css';
 import AppHeader from './components/Layout/header';
+import Footer from './components/Layout/footer';
 import Room from './pages/Room';
 // import { browserHistory } from './helpers';
 
@@ -34,6 +35,7 @@ const App = () => {
                         <Route path='/room/:id' children={<Room />} />
                     </Switch>
                 </Suspense>
+                <Footer/>
             </Router>
         </React.Fragment>
     );
