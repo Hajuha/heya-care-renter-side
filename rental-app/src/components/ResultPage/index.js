@@ -7,11 +7,10 @@ import { ArrowUpOutlined } from '@ant-design/icons';
 
 const ResultPage = (props) => {
     const { searchQuery } = props;
-    console.log(searchQuery);
     let [rooms, setRooms] = useState([]);
     let [isLoading, setIsLoading] = useState(true);
     let [filterOptions, setFilterOption] = useState(() => {
-        console.log('Update filter');
+        
         return { q: searchQuery };
     });
 
@@ -33,6 +32,7 @@ const ResultPage = (props) => {
 
     useEffect(() => {
         getRooms(filterOptions);
+        console.log(filterOptions);
     }, [filterOptions]);
 
     const getRooms = (filterOptions) => {

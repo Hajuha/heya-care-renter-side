@@ -35,10 +35,10 @@ const AppHeader = (props) => {
     );
     const searchRoom = (values) => {
         browserHistory.push({
-            pathname: '/results/',
+            pathname: '/results',
             search: '?' + new URLSearchParams({ q: values }).toString(),
         });
-        // window.location.reload();   
+        window.location.reload();   
     };
 
     return (

@@ -98,7 +98,7 @@ const RoomPage = () => {
                     <Link to='/'>Trang chủ</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link to='/'>{room.city.name}</Link>
+                    <Link to='/search/'>{room.city.name}</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
                     <Link to='/'>{room.district.name}</Link>
@@ -344,10 +344,10 @@ const RoomPage = () => {
                                     <div
                                         className={
                                             'utility ' +
-                                            (utility.water_heater ===
+                                            (utility.kitchen_type ===
                                             'Không nấu ăn'
-                                                ? 'show'
-                                                : 'hidden')
+                                                ? 'hidden'
+                                                : 'show')
                                         }>
                                         <img
                                             alt=''

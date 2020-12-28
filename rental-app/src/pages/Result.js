@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import ResultPage from '../components/ResultPage';
-
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+const search = window.location.search;
+const query = new URLSearchParams(search);
 const Result = () => {
-    console.log('222222222');
-    let { searchQuery } = useQuery().get('q');
-    console.log('aaa', searchQuery);
+    let searchQuery = query.get('q');
+    console.log(searchQuery);
     return <ResultPage searchQuery={searchQuery} />;
 };
 
