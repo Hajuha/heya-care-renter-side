@@ -98,7 +98,7 @@ const RoomPage = () => {
                     <Link to='/'>Trang chủ</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link to='/search/'>{room.city.name}</Link>
+                    <Link to='/results/'>{room.city.name}</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
                     <Link to='/'>{room.district.name}</Link>
