@@ -1,0 +1,66 @@
+@import "src/styles/variable";
+@media screen and (max-width: 575px) {
+    .banner-page {
+        display: none;
+    }
+}
+.banner-page {
+    #tsparticles {
+        position: absolute;
+        top: 0;
+        overflow: hidden;
+    }
+
+    margin-top: 80px;
+    background-color: $color-pink;
+    height: 24rem;
+    width: 100%;
+    overflow: hidden;
+    padding: 100px 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+
+    .title-wrap {
+        margin-left: 5rem;
+        color: white;
+        //width: 100%;
+
+        .big-title {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.44);
+            font-size: 2.5rem;
+            font-family: $font-beVietnam-bold;
+            font-weight: bold;
+        }
+
+        .title {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.44);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    }
+
+    .banner-content {
+        padding-top: 2rem;
+        margin-left: 5rem;
+        color: white;
+        text-align: end;
+
+        .search-now {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .place {
+            .img {
+
+            }
+
+            .text {
+
+            }
+        }
+    }
+}
