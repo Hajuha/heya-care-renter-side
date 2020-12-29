@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Switch, Route, BrowserRouter as Router} from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Result from './pages/Result';
@@ -10,8 +10,10 @@ import 'font-awesome/css/font-awesome.min.css';
 import AppHeader from './components/Layout/header';
 import Footer from './components/Layout/footer';
 import Room from './pages/Room';
+import UserRoute from './routes/UserRoute'
+import GuestRoute from './routes/GuestRoute'
 // import { browserHistory } from './helpers';
-
+    
 require('dotenv').config();
 
 const App = () => {
@@ -23,9 +25,9 @@ const App = () => {
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
                         <Route exact path='/' component={Homepage} />
-                        <Route exact path='/login' component={Login} />
-                        <Route exact path='/register' component={Signup} />
-                        <Route
+                        <GuestRoute exact path='/login' component={Login} />
+                        <GuestRoute exact path='/register' component={Signup} />
+                        <GuestRoute
                             exact
                             path='/register/success'
                             component={SignupSuccess}
