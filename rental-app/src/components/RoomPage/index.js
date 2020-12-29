@@ -30,6 +30,8 @@ import airConditionerIcon from '../../assets/icons/air-conditioner.svg';
 import waterHeaterIcon from '../../assets/icons/water-heater.svg';
 import { Link, useParams } from 'react-router-dom';
 import Avatar from 'antd/lib/avatar/avatar';
+import Comment from '../RoomComment';
+import RoomComment from '../RoomComment';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
@@ -38,6 +40,10 @@ const RoomPage = () => {
     let [isLoading, setIsLoading] = useState(true);
     let { id } = useParams();
     const [showScroll, setShowScroll] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const checkScrollTop = () => {
         if (!showScroll && window.pageYOffset > 400) {
@@ -102,13 +108,19 @@ const RoomPage = () => {
                     <Link to='/'>Trang chủ</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link to='/results/'>{room.city.name}</Link>
+                    <Link to={`/results/?q=${room.city.name}`}>
+                        {room.city.name}
+                    </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link to='/'>{room.district.name}</Link>
+                    <Link to={`/results/?q=${room.district.name}`}>
+                        {room.district.name}
+                    </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link to='/'>{room.ward.name}</Link>
+                    <Link to={`/results/?q=${room.ward.name}`}>
+                        {room.ward.name}
+                    </Link>
                 </Breadcrumb.Item>
             </Breadcrumb>
             <div className='room-title'>
@@ -408,6 +420,9 @@ const RoomPage = () => {
                                     </Tag>
                                 );
                             })}
+                        </Card>
+                        <Card>
+                            <RoomComment id={id} room={room} />
                         </Card>
                     </Col>
                 </Row>
