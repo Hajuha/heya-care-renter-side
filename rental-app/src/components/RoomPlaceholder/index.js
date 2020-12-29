@@ -9,12 +9,13 @@ import { Card, Col, Row, Typography } from 'antd';
 import * as React from 'react';
 
 import './style.scss';
+import './responsive.scss';
 import { Link, useHistory } from 'react-router-dom';
 const RoomPlaceholder = (props) => {
     const { Room } = props;
     const history = useHistory();
     // let [Room, setRoom] = React.useState(room);
-    const price_in_million = Room.price / 1000000;
+    const price_in_million = (Room.price / 1000000).toFixed(1);
     // console.log(price_in_million);
     const path = `/room/${Room.id}`;
     return (
@@ -22,7 +23,7 @@ const RoomPlaceholder = (props) => {
             <Link to={path}>
                 <div className='room-placeholder'>
                     <Row align='center'>
-                        <Col>
+                        <Col md={6} sm={24}>
                             <div className='image-container'>
                                 <img
                                     alt=''
@@ -32,10 +33,12 @@ const RoomPlaceholder = (props) => {
                             </div>
                         </Col>
 
-                        <Col span={18}>
+                        <Col md={18} sm={24}>
                             <div className='room-info'>
                                 <Row>
-                                    <Col span={20}>
+                                    <Col
+                                        span={20}
+                                        style={{ padding: '0 0.5rem' }}>
                                         <span className='title'>
                                             {Room.title}
                                         </span>

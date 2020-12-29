@@ -1,0 +1,8 @@
+@import "src/styles/variable";
+
+@media screen and (max-width: 575px) {
+    .result-page {
+        padding:20px 0;
+        margin: (80rem/24) (10rem/24) !important;
+    }
+}

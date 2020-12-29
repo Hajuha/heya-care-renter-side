@@ -1,0 +1,22 @@
+@media screen and (max-width: 575px) {
+    .room-page {
+        margin: (80rem/24) (20rem/24) !important;
+    }
+
+    .utility {
+        margin-bottom: 0.5rem !important;
+    }
+    .card-scroll {
+        position: relative !important;
+        top: unset !important;
+    }
+    .owner-info {
+        top: unset;
+    }
+
+    .owner-info {
+        border-radius: 1rem;
+        width: 100% !important;
+        margin-bottom: 1rem;
+    }
+}

@@ -1,14 +1,19 @@
-import { Col, Input, Row, Select } from 'antd';
-import React, { useEffect } from 'react';
+import { Col, Dropdown, Input, Menu, Row, Select } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import Logo from '../../../assets/icons/header-logo.svg';
 import { browserHistory } from '../../../helpers';
-
+import { connect } from 'react-redux';
+import authAPI from '../../../services/apis/auth';
+import * as actions from '../../../actions/auth';
 import './style.scss';
+import Avatar from 'antd/lib/avatar/avatar';
+import { DownOutlined, LogoutOutlined } from '@ant-design/icons';
 
 const AppHeader = (props) => {
     const [scrolled, setScrolled] = React.useState(false);
-    const location = useLocation();
+    const [currentUser, setCurrentUser] = useState({});
+    const { isAuthenticated, logout } = props;
 
     const handleScroll = () => {
         const offset = window.scrollY;
@@ -20,8 +25,12 @@ const AppHeader = (props) => {
     };
 
     useEffect(() => {
-        console.log('ssss');
-    }, [location]);
+        if (isAuthenticated) {
+            authAPI.getUser().then((user) => {
+                setCurrentUser(user.data);
+            });
+        }
+    }, []);
 
     React.useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -36,7 +45,6 @@ const AppHeader = (props) => {
     const selectBefore = (
         <Select defaultValue='HN' className='select-before'>
             <Select.Option value='HN'>Hà Nội</Select.Option>
-            <Select.Option value='hcm'>Hà Nộiiiii</Select.Option>
         </Select>
     );
     const searchRoom = (values) => {
@@ -46,6 +54,20 @@ const AppHeader = (props) => {
         });
         window.location.reload();
     };
+
+    const handleLogout = () => {
+        browserHistory.push('/login');
+        logout();
+    };
+
+    const userMenu = (
+        <Menu>
+            <Menu.Item data-testid='btn-logout' onClick={handleLogout}>
+                <LogoutOutlined />
+                <span>Đăng xuất</span>
+            </Menu.Item>
+        </Menu>
+    );
 
     return (
         <React.Fragment>
@@ -68,14 +90,34 @@ const AppHeader = (props) => {
                         </div>
                     </Col>
                     <Col md={3}>
-                        <Link to='/login'>
-                            <span className='login'>Sign In</span>
-                        </Link>
+                        {!isAuthenticated ? (
+                            <Link to='/login'>
+                                <span className='login'>Sign In</span>
+                            </Link>
+                        ) : (
+                            <Dropdown overlay={userMenu} trigger={['click']}>
+                                <span className='app-user'>
+                                    <Avatar
+                                        src={currentUser.avatar_url}
+                                        size={64}
+                                    />
+                                    <span className='name'>
+                                        {currentUser.fullname}
+                                    </span>
+                                    <DownOutlined />
+                                </span>
+                            </Dropdown>
+                        )}
                     </Col>
                 </Row>
             </div>
         </React.Fragment>
     );
 };
+function mapStateToProps(state) {
+    return {
+        isAuthenticated: !!state.user.token,
+    };
+}
 
-export default AppHeader;
+export default connect(mapStateToProps, { logout: actions.logout })(AppHeader);

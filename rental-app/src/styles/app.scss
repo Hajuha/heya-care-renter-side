@@ -62,3 +62,25 @@ body {
 .app-spinner {
     margin-top: 300px;
 }
+
+.img-slide {
+    object-fit: contain;
+}
+
+.swiper-wrapper {
+    height: auto !important;
+}
+
+.swiper-slide {
+    height: auto !important;
+}
+
+.ant-col {
+    width: 100%
+}
+
+.ant-pagination {
+    display: flex;
+    justify-content: center;
+    margin:20px;
+}

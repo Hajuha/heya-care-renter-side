@@ -64,6 +64,7 @@
         }
 
         .utility {
+            width: 100%;
             display: flex;
             align-items: center;
 
@@ -80,7 +81,7 @@
         }
 
         .utility.hidden {
-            color: #E2F1F1;
+            color: #e2f1f1;
         }
     }
 
@@ -120,6 +121,27 @@
                 border: 2px solid #fff;
                 box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, 0.05);
             }
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-right: 0.5rem;
+            color: $color-pink;
+        }
+
+        .owner-name {
+            font-size: 16px;
+            font-family: $font-beVietnam-medium;
+            line-height: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .owner-phone {
+            display: flex;
+            margin-bottom: 0.25rem;
+        }
+        .owner-email {
+            display: flex;
         }
     }
 

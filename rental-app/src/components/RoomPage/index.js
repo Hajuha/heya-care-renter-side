@@ -14,6 +14,8 @@ import {
     RocketFilled,
     EditFilled,
     ArrowUpOutlined,
+    PhoneFilled,
+    MailFilled,
 } from '@ant-design/icons';
 import roomAPI from '../../services/apis/room';
 import 'swiper/swiper.scss';
@@ -21,11 +23,15 @@ import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import './style.scss';
+import './responsive.scss';
 import balconyIcon from '../../assets/icons/balcony.svg';
 import kitchenIcon from '../../assets/icons/gas-stove.svg';
 import airConditionerIcon from '../../assets/icons/air-conditioner.svg';
 import waterHeaterIcon from '../../assets/icons/water-heater.svg';
 import { Link, useParams } from 'react-router-dom';
+import Avatar from 'antd/lib/avatar/avatar';
+import Comment from '../RoomComment';
+import RoomComment from '../RoomComment';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
@@ -34,6 +40,10 @@ const RoomPage = () => {
     let [isLoading, setIsLoading] = useState(true);
     let { id } = useParams();
     const [showScroll, setShowScroll] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const checkScrollTop = () => {
         if (!showScroll && window.pageYOffset > 400) {
@@ -98,19 +108,25 @@ const RoomPage = () => {
                     <Link to='/'>Trang chủ</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link to='/results/'>{room.city.name}</Link>
+                    <Link to={`/results/?q=${room.city.name}`}>
+                        {room.city.name}
+                    </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link to='/'>{room.district.name}</Link>
+                    <Link to={`/results/?q=${room.district.name}`}>
+                        {room.district.name}
+                    </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link to='/'>{room.ward.name}</Link>
+                    <Link to={`/results/?q=${room.ward.name}`}>
+                        {room.ward.name}
+                    </Link>
                 </Breadcrumb.Item>
             </Breadcrumb>
             <div className='room-title'>
                 <Typography.Title level={2}>{room.title}</Typography.Title>
             </div>
-            <Row gutter={32}>
+            <Row gutter={{ xl: '32', sm: '0' }}>
                 <Col sm={24} xl={{ span: 8, push: 16 }}>
                     <Card
                         title={
@@ -123,28 +139,45 @@ const RoomPage = () => {
                         }
                         className={navbarClasses.join(' ')}>
                         <div className='body'>
-                            <div
-                                className='owner-avt'
-                                style={{
-                                    backgroundImage:
-                                        'url(' + owner.avatar_url + ')',
-                                }}></div>
-                            <Typography.Title level={4}>
-                                {owner.fullname}
-                            </Typography.Title>
-                            <Typography.Title level={5}>
-                                {owner.phone_number}
-                            </Typography.Title>
+                            <Row align='center'>
+                                <Col span={6}>
+                                    <Avatar
+                                        src={owner.avatar_url}
+                                        size={64}
+                                        style={{ margin: 'auto' }}
+                                    />
+                                </Col>
+                                <Col span={18}>
+                                    <div className='owner-info'>
+                                        <div className='owner-name'>
+                                            {owner.fullname}
+                                        </div>
+                                        <div className='owner-phone'>
+                                            <PhoneFilled className='icon'></PhoneFilled>
+                                            <a
+                                                href={`tel:${owner.phone_number}`}>
+                                                {owner.phone_number}
+                                            </a>
+                                        </div>
+                                        <div className='owner-email'>
+                                            <MailFilled className='icon'></MailFilled>
+                                            <a href={`mailto:${owner.email}`}>
+                                                {owner.email}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </Col>
+                            </Row>
                         </div>
                     </Card>
                 </Col>
                 <Col sm={24} xl={{ span: 16, pull: 8 }}>
                     <Swiper
                         spaceBetween={0}
-                        autoplay={{
-                            delay: 1500,
-                            disableOnInteraction: false,
-                        }}
+                        // autoplay={{
+                        //     delay: 1500,
+                        //     disableOnInteraction: false,
+                        // }}
                         loop={true}
                         slidesPerView={1}
                         navigation={{ clickable: true }}
@@ -172,7 +205,7 @@ const RoomPage = () => {
                     }}>
                     <ArrowUpOutlined className='icon' />
                 </div>
-                <Row gutter={32}>
+                <Row gutter={{ xl: '32', sm: '0' }}>
                     <Col xl={16} span={24}>
                         <Card
                             title={
@@ -252,7 +285,10 @@ const RoomPage = () => {
                                         }}>
                                         GIÁ ĐIỆN
                                     </div>
-                                    <div>{room.electricity_price}</div>
+                                    <div>
+                                        {room.electricity_price.toLocaleString()}{' '}
+                                        đồng
+                                    </div>
                                 </Col>
                                 <Col span={6}>
                                     <div
@@ -261,7 +297,9 @@ const RoomPage = () => {
                                         }}>
                                         GIÁ NƯỚC
                                     </div>
-                                    <div>{room.water_price}</div>
+                                    <div>
+                                        {room.water_price.toLocaleString()} đồng
+                                    </div>
                                 </Col>
                             </Row>
                             <Row className='info-container'>
@@ -292,8 +330,8 @@ const RoomPage = () => {
                                 </div>
                             }
                             className='room-information'>
-                            <Row>
-                                <Col md={12} lg={6}>
+                            <Row justify='space-around'>
+                                <Col span={12} md={6}>
                                     <div
                                         className={
                                             'utility ' +
@@ -308,7 +346,7 @@ const RoomPage = () => {
                                         <div className='text'>Ban công</div>
                                     </div>
                                 </Col>
-                                <Col md={12} lg={6}>
+                                <Col span={12} md={6}>
                                     <div
                                         className={
                                             'utility ' +
@@ -323,7 +361,7 @@ const RoomPage = () => {
                                         <div className='text'>Điều hòa</div>
                                     </div>
                                 </Col>
-                                <Col md={12} lg={6}>
+                                <Col span={12} md={6}>
                                     <div
                                         className={
                                             'utility ' +
@@ -340,7 +378,7 @@ const RoomPage = () => {
                                         </div>
                                     </div>
                                 </Col>
-                                <Col md={12} lg={6}>
+                                <Col span={12} md={6}>
                                     <div
                                         className={
                                             'utility ' +
@@ -382,6 +420,9 @@ const RoomPage = () => {
                                     </Tag>
                                 );
                             })}
+                        </Card>
+                        <Card>
+                            <RoomComment id={id} room={room} />
                         </Card>
                     </Col>
                 </Row>

@@ -106,28 +106,6 @@ const SignupPage = () => {
                                 </Button>
                             </Form>
 
-                            <Divider>{'Hoặc'}</Divider>
-
-                            <Row justify='center' gutter={[16, 0]}>
-                                <Col>
-                                    <img
-                                        className='social-button'
-                                        src={logoFB}
-                                        alt='facebook-icon'
-                                        onClick={handleSignInFb}
-                                    />
-                                </Col>
-
-                                <Col>
-                                    <img
-                                        className='social-button'
-                                        src={logoGG}
-                                        alt='google-icon'
-                                        onClick={handleSignInGoogle}
-                                    />
-                                </Col>
-                            </Row>
-
                             <div className='text-align-center'>
                                 <p className='signup-guide'>
                                     {'Đã có tài khoản?'}&nbsp;

@@ -1,0 +1,56 @@
+@import '../../styles/variable';
+
+.room-placeholder-trending {
+    color: black;
+    cursor: pointer;
+
+    width: 100%;
+    background-color: white;
+    // border-radius: 0.5rem;
+    // padding: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #cdcdcd;
+    .image-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    &-image {
+        height: auto;
+        width: 100%;
+        height: 8rem;
+        border-radius: 0.5rem;
+    }
+
+    .icon {
+        color: #c89696;
+        font-size: 0.75rem;
+    }
+
+    .unit {
+        margin-left: 0.5rem;
+    }
+
+    .info {
+        margin-bottom: 0;
+    }
+    .title {
+        margin: auto;
+        margin-top: 0.25rem;
+        font-size: 0.75rem;
+        font-family: $font-beVietnam-medium;
+    }
+
+    .price {
+        height: 100%;
+        color: $color-pink;
+        font-size: 0.75rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .price_ {
+            font-size: 0.75rem;
+            font-family: $font-beVietnam-medium;
+        }
+    }
+}

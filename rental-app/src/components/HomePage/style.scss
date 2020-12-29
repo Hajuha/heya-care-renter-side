@@ -5,3 +5,10 @@
     padding-top: (20rem/24);
     // display: flex;
 }
+
+@media screen and (max-width: 575px) {
+    .home-page {
+        padding:20px 0;
+        margin: (80rem/24) (10rem/24) !important;
+    }
+}

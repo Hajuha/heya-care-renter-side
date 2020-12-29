@@ -24,27 +24,22 @@ export default {
     login: (data) =>
         axios({
             method: 'post',
-            url: `${server_endpoint}/register/`,
-            data: data,
+            url: `${server_endpoint}/users/login`,
+            data: {
+                username: data.username,
+                password: data.password,
+            },
             headers: {
                 'Content-Type': 'application/json',
             },
         }).then((res) => {
             return res.data;
         }),
-
-    delete: (id) =>
-        axios({
-            method: 'delete',
-            url: `${server_endpoint}/api/v1/domain/${id}`,
-        }).then((res) => {
-            return res.data;
-        }),
-
-    get: (data) =>
+    getUser: (data) =>
         axios({
             method: 'get',
-            url: `${server_endpoint}/apis/accommodation/search`,
+            url: `${server_endpoint}/users/get_status`,
+            data: data,
             headers: {
                 'Content-Type': 'application/json',
             },
