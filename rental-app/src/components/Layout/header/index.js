@@ -1,6 +1,7 @@
 import { Col, Dropdown, Input, Menu, Row, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect, useLocation } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { useHistory, useLocation } from "react-router";
 import Logo from '../../../assets/icons/header-logo.svg';
 import { browserHistory } from '../../../helpers';
 import { connect } from 'react-redux';
@@ -14,7 +15,9 @@ const AppHeader = (props) => {
     const [scrolled, setScrolled] = React.useState(false);
     const [currentUser, setCurrentUser] = useState({});
     const { isAuthenticated, logout } = props;
-
+    const [state, setState] = React.useState(false);
+    const location = useLocation();
+    const histiory = useHistory()
     const handleScroll = () => {
         const offset = window.scrollY;
         if (offset > 200) {
@@ -33,9 +36,12 @@ const AppHeader = (props) => {
     }, []);
 
     React.useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+        // window.addEventListener('scroll', handleScroll);
     });
-
+    useEffect(() => {
+        // console.log(location);
+        // console.log(state);
+    }, [location])
     let navbarClasses = ['app-header'];
 
     if (scrolled) {
@@ -48,15 +54,16 @@ const AppHeader = (props) => {
         </Select>
     );
     const searchRoom = (values) => {
-        browserHistory.push({
+        histiory.push({
             pathname: '/results',
             search: '?' + new URLSearchParams({ q: values }).toString(),
         });
-        window.location.reload();
+        // setState(!state)
+        // window.location.reload();
     };
 
     const handleLogout = () => {
-        browserHistory.push('/login');
+        histiory.push('/login');
         logout();
     };
 

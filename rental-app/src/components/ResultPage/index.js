@@ -96,13 +96,7 @@ const ResultPage = (props) => {
     const priceFormat = (values) => {
         return `${values.toLocaleString()}đ`;
     };
-    ax: 0
-    electricity_price_min: 0
-    price_max: 0
-    price_min: 0
-    q: ""
-    water_price_max: 0
-    water_price_min: 0
+
     return (
         <div className='result-page'>
             <Row gutter={{ lg: '32', sm: '0' }}>

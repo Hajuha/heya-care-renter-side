@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { Switch, Route, BrowserRouter as Router} from 'react-router-dom';
+// import { Switch, Route, BrowserRouter as Router} from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Result from './pages/Result';
 import Login from './pages/Login';
@@ -12,14 +12,16 @@ import Footer from './components/Layout/footer';
 import Room from './pages/Room';
 import UserRoute from './routes/UserRoute'
 import GuestRoute from './routes/GuestRoute'
-// import { browserHistory } from './helpers';
+import { browserHistory } from './helpers';
+import { createBrowserHistory } from "history";
+import { Redirect, Route, Router, Switch, useLocation } from "react-router-dom";
     
 require('dotenv').config();
-
+export const history = createBrowserHistory();
 const App = () => {
     return (
         <React.Fragment>
-            <Router>
+            <Router history={history}>
                 <AppHeader />
 
                 <Suspense fallback={<div>Loading...</div>}>
