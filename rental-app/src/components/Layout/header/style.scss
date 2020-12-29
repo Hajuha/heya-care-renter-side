@@ -87,6 +87,23 @@
             }
         }
     }
+    .app-user {
+        position: relative;
+        top: -3px;
+        // padding: 8px 0;
+        // margin: 0 16px;
+        cursor: pointer;
+        color: white;
+
+        .ant-avatar {
+            top: -1px;
+        }
+
+        .name {
+            font-size: 20px;
+            margin: 0 10px;
+        }
+    }
 
     @media (max-width: 536px) {
         .search-bar {
@@ -97,7 +114,6 @@
         color: white;
         font-size: 1rem;
         font-family: $font-beVietnam-medium;
-
     }
 }
 
@@ -106,4 +122,13 @@
     top: 0;
     box-shadow: black;
     width: 100%;
+}
+
+.ant-dropdown-menu {
+    border-radius: 0.5rem;
+    margin-top: 36px;
+    .ant-dropdown-menu-item {
+        font-size: 1rem !important;
+        height: 40px !important;
+    }
 }

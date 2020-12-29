@@ -26,21 +26,21 @@ function Footer(props) {
                             </div>
 
                             <div className='social-connect'>
-                                <Link href='/'>
+                                <a href='/'>
                                     <img
                                         alt='/'
                                         className='logo-social'
                                         src={LogoFB}
                                     />
-                                </Link>
+                                </a>
 
-                                <Link href='/'>
+                                <a href='/'>
                                     <img
                                         alt='/'
                                         className='logo-social'
                                         src={LogoGG}
                                     />
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     </Col>
