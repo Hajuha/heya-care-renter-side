@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Background from '../../assets/images/background.jpg';
 import LogoTransparent from '../../assets/icons/logo_transparent.png';
 import GoogleIcon from '../../assets/icons/logo-google-plus.svg';
@@ -10,12 +10,20 @@ import 'antd/dist/antd.css';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { login } from '../../actions/auth';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+    const [isLogged, setIsLogged] = React.useState(false);
+
+    if (isLogged || props.isAuthenticated) {
+        // window.location.reload();
+        return <Redirect to={'/'} />;
+    }
+
     const onFinish = (values) => {
-        console.log('Success:', values);
         login(values);
+        setIsLogged(true);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -143,4 +151,10 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+function mapStateToProps(state) {
+    return {
+        isAuthenticated: !!state.user.token,
+    };
+}
+
+export default connect(mapStateToProps, {})(LoginPage);

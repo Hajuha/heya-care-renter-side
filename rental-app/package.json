@@ -16,6 +16,7 @@
     "google-map-react": "^2.1.9",
     "history": "^5.0.0",
     "json-mapping": "^1.1.5",
+    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "pigeon-maps": "^0.17.0",
     "react": "^17.0.1",
@@ -33,12 +34,13 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
     "serve": "^11.3.2",
     "swiper": "^6.4.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Row,
     Col,
@@ -16,30 +16,29 @@ import RoomPlaceholder from '../RoomPlaceholder';
 import './style.scss';
 import './responsive.scss';
 import roomAPI from '../../services/apis/room';
-import {ArrowUpOutlined} from '@ant-design/icons';
+import { ArrowUpOutlined } from '@ant-design/icons';
 import Text from 'antd/lib/typography/Text';
 import balconyIcon from '../../assets/icons/balcony.svg';
 import kitchenIcon from '../../assets/icons/gas-stove.svg';
 import airConditionerIcon from '../../assets/icons/air-conditioner.svg';
 import waterHeaterIcon from '../../assets/icons/water-heater.svg';
 
-const {Panel} = Collapse;
+const { Panel } = Collapse;
 
 const ResultPage = (props) => {
-    const {searchQuery} = props;
+    const { searchQuery } = props;
     let [rooms, setRooms] = useState([]);
     let [total, setTotal] = useState([]);
     let [isLoading, setIsLoading] = useState(true);
     let [filterOptions, setFilterOption] = useState(() => {
         return {
             q: searchQuery,
-            price_max: 10000000,
-            price_min: 200000,
-            electricity_price_max: 10000,
+            price_max: 0,
+            price_min: 0,
+            electricity_price_max: 0,
             electricity_price_min: 0,
-            water_price_max: 150000,
-            water_price_min: 1000,
-            has_electric_water_heater: false,
+            water_price_max: 0,
+            water_price_min: 0,
         };
     });
 
@@ -63,8 +62,12 @@ const ResultPage = (props) => {
         }
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const scrollTop = () => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     window.addEventListener('scroll', checkScrollTop);
@@ -87,16 +90,22 @@ const ResultPage = (props) => {
     };
 
     if (isLoading) {
-        return <Spin className='app-spinner'/>;
+        return <Spin className='app-spinner' />;
     }
 
     const priceFormat = (values) => {
         return `${values.toLocaleString()}đ`;
     };
-
+    ax: 0
+    electricity_price_min: 0
+    price_max: 0
+    price_min: 0
+    q: ""
+    water_price_max: 0
+    water_price_min: 0
     return (
         <div className='result-page'>
-            <Row gutter={{lg: '32', sm: '0'}}>
+            <Row gutter={{ lg: '32', sm: '0' }}>
                 <div
                     className='scrollTop'
                     onClick={scrollTop}
@@ -104,10 +113,10 @@ const ResultPage = (props) => {
                         height: 40,
                         display: showScroll ? 'flex' : 'none',
                     }}>
-                    <ArrowUpOutlined className='icon'/>
+                    <ArrowUpOutlined className='icon' />
                 </div>
                 <Col md={8} sm={24}>
-                    <Card style={{width: '100%'}}>
+                    <Card style={{ width: '100%' }}>
                         <Typography.Title level={4}>Bộ lọc</Typography.Title>
                         <Collapse bordered={false}>
                             <Panel header={'Giá tiền'} key='1'>
@@ -127,15 +136,16 @@ const ResultPage = (props) => {
                                     }}
                                     defaultValue={[200000, 10000000]}
                                 />
-                                <div style={{display: 'flex'}}>
-                                    <Text className='price-min' style={{flexGrow: '1'}}>
+                                <div style={{ display: 'flex' }}>
+                                    <Text
+                                        className='price-min'
+                                        style={{ flexGrow: '1' }}>
                                         {filterOptions.price_min} đ
                                     </Text>
                                     <Text className='price-max'>
                                         {filterOptions.price_max} đ
                                     </Text>
                                 </div>
-
                             </Panel>
 
                             <Panel header={'Giá điện'} key='2'>
@@ -155,15 +165,16 @@ const ResultPage = (props) => {
                                     }}
                                     defaultValue={[0, 5000]}
                                 />
-                                <div style={{display: 'flex'}}>
-                                    <Text className='price-min' style={{flexGrow: '1'}}>
+                                <div style={{ display: 'flex' }}>
+                                    <Text
+                                        className='price-min'
+                                        style={{ flexGrow: '1' }}>
                                         {filterOptions.electricity_price_min} đ
                                     </Text>
                                     <Text className='price-max'>
                                         {filterOptions.electricity_price_max} đ
                                     </Text>
                                 </div>
-
                             </Panel>
                             <Panel header={'Giá nước'} key='3'>
                                 <Slider
@@ -182,15 +193,16 @@ const ResultPage = (props) => {
                                     }}
                                     defaultValue={[3000, 150000]}
                                 />
-                                <div style={{display: 'flex'}}>
-                                    <Text className='price-min' style={{flexGrow: '1'}}>
+                                <div style={{ display: 'flex' }}>
+                                    <Text
+                                        className='price-min'
+                                        style={{ flexGrow: '1' }}>
                                         {filterOptions.water_price_min} đ
                                     </Text>
                                     <Text className='price-max'>
                                         {filterOptions.water_price_max} đ
                                     </Text>
                                 </div>
-
                             </Panel>
                             <Panel header={'Tiện ích'} key='4'>
                                 <div>
@@ -203,7 +215,7 @@ const ResultPage = (props) => {
                                                 (filterOptions) => ({
                                                     ...filterOptions,
                                                     is_stay_with_the_owner:
-                                                    e.target.value,
+                                                        e.target.value,
                                                 })
                                             );
                                         }}>
@@ -221,7 +233,7 @@ const ResultPage = (props) => {
                                                 (filterOptions) => ({
                                                     ...filterOptions,
                                                     has_air_conditioning:
-                                                    e.target.value,
+                                                        e.target.value,
                                                 })
                                             );
                                         }}>
@@ -239,7 +251,7 @@ const ResultPage = (props) => {
                                                 (filterOptions) => ({
                                                     ...filterOptions,
                                                     has_electric_water_heater:
-                                                    e.target.value,
+                                                        e.target.value,
                                                 })
                                             );
                                         }}>
@@ -274,7 +286,7 @@ const ResultPage = (props) => {
                                                 (filterOptions) => ({
                                                     ...filterOptions,
                                                     kitchen_type:
-                                                    e.target.value,
+                                                        e.target.value,
                                                 })
                                             );
                                         }}>
@@ -293,7 +305,7 @@ const ResultPage = (props) => {
                                                 (filterOptions) => ({
                                                     ...filterOptions,
                                                     bathroom_type:
-                                                    e.target.value,
+                                                        e.target.value,
                                                 })
                                             );
                                         }}>
@@ -307,15 +319,15 @@ const ResultPage = (props) => {
                 </Col>
                 <Col md={16} sm={24}>
                     {!isLoading && rooms.length === 0 ? (
-                        <Card style={{width: '100%'}}>
+                        <Card style={{ width: '100%' }}>
                             {' '}
-                            <Empty/>{' '}
+                            <Empty />{' '}
                         </Card>
                     ) : (
                         <div>
                             <Pagination {...paginationOptions} />
                             {rooms.map((room, index) => (
-                                <RoomPlaceholder key={index} Room={room}/>
+                                <RoomPlaceholder key={index} Room={room} />
                             ))}
                             <Pagination {...paginationOptions} />
                         </div>
