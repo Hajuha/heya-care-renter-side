@@ -90,7 +90,7 @@ const RoomPage = () => {
     }
 
     if (isLoading) {
-        return <Spin className='app-spinner' />;
+        return <></>;
     }
 
     const { images, owner, nearby_locations } = room;
@@ -127,7 +127,7 @@ const RoomPage = () => {
                 <Typography.Title level={2}>{room.title}</Typography.Title>
             </div>
             <Row gutter={{ xl: '32', sm: '0' }}>
-                <Col sm={24} xl={{ span: 8, push: 16 }}>
+                <Col sm={24} xl={{ span: 8, push: 16 }} style={{ width: '100%' }}>
                     <Card
                         title={
                             <div className='card-header room-info-card'>

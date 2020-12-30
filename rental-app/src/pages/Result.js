@@ -2,14 +2,16 @@ import { Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ResultPage from '../components/ResultPage';
-const search = window.location.search;
-const query = new URLSearchParams(search);
-const Result = () => {
+import queryString from 'query-string';
+
+const Result = (props) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const location = useLocation();
+    
     useEffect(() => {
-        setSearchQuery(query.get('q'));
+        console.log(location);
+        setSearchQuery(queryString.parse(location.search).q);
         setIsLoading(false);
     }, [location]);
 

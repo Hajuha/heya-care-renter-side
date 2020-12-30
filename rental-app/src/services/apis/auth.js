@@ -46,4 +46,14 @@ export default {
         }).then((res) => {
             return res.data;
         }),
+    confirmEmail: (data) =>
+        axios({
+            method: 'get',
+            url: `${server_endpoint}/register/confirm_email/${data.token}`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => {
+            return res;
+        }),
 };
