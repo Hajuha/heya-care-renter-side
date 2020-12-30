@@ -16,13 +16,15 @@ import { connect, useDispatch } from 'react-redux';
 const LoginPage = (props) => {
     const [isLogged, setIsLogged] = React.useState(false);
     const dispatch = useDispatch();
-    const history  = useHistory()
+    const history = useHistory();
     if (isLogged && props.isAuthenticated) {
         return <Redirect to={'/'} />;
     }
 
     const onFinish = (values) => {
-        login(values,dispatch, ()=> {history.push('/');});
+        login(values, dispatch, () => {
+            history.push('/');
+        });
 
         setIsLogged(true);
     };
@@ -65,6 +67,10 @@ const LoginPage = (props) => {
                                 {
                                     required: true,
                                     message: 'Please input your username!',
+                                },
+                                {
+                                    pattern: /^[a-z][a-z0-9_.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/g,
+                                    message: 'Email không đúng định dạng',
                                 },
                             ]}>
                             <Input placeholder='Tên đăng nhập/email' />
