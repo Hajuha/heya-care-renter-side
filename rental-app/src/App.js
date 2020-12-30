@@ -10,12 +10,14 @@ import 'font-awesome/css/font-awesome.min.css';
 import AppHeader from './components/Layout/header';
 import Footer from './components/Layout/footer';
 import Room from './pages/Room';
-import UserRoute from './routes/UserRoute'
-import GuestRoute from './routes/GuestRoute'
+import UserRoute from './routes/UserRoute';
+import GuestRoute from './routes/GuestRoute';
 import { browserHistory } from './helpers';
-import { createBrowserHistory } from "history";
-import { Redirect, Route, Router, Switch, useLocation } from "react-router-dom";
-    
+import { createBrowserHistory } from 'history';
+import { Redirect, Route, Router, Switch, useLocation } from 'react-router-dom';
+import Favorite from './components/Favorite';
+import SignupConfirm from './components/SignupPage/SignupConfirm';
+
 require('dotenv').config();
 export const history = createBrowserHistory();
 const App = () => {
@@ -34,12 +36,20 @@ const App = () => {
                             path='/register/success'
                             component={SignupSuccess}
                         />
-
+                        <GuestRoute
+                            path='/register/confirm_email/:id'
+                            component={SignupConfirm}
+                        />
+                        <UserRoute
+                            exact
+                            path='/favorite'
+                            component={Favorite}
+                        />
                         <Route path='/results/' children={<Result />} />
                         <Route path='/room/:id' children={<Room />} />
                     </Switch>
                 </Suspense>
-                <Footer/>
+                <Footer />
             </Router>
         </React.Fragment>
     );
