@@ -57,9 +57,9 @@ const RoomComment = (props) => {
             setRated(true);
         });
     };
-    const openNotification = () => {
+    const openNotification = (message) => {
         const args = {
-            message: 'Phòng đã được lưu vào danh sách ưa thích',
+            message: message,
 
             duration: 3,
         };
@@ -67,15 +67,19 @@ const RoomComment = (props) => {
     };
 
     const addFavorite = () => {
-        const data = {
-            accommodation_id: id,
-        };
-        openNotification();
-        roomAPI.addFavorite(data).then((res) => {});
+        let message = 'Vui lòng đăng nhập để thực hiện chức năng này';
+        if (user.access_token) {
+            message = 'Phòng đã được lưu vào danh sách ưa thích';
+            const data = {
+                accommodation_id: id,
+            };
+            openNotification(message);
+            roomAPI.addFavorite(data).then((res) => {});
+        } else openNotification(message);
     };
 
     const createRating = () => {
-        if (user.access_token) setIsLoading(!isLoading);
+        if (user.access_token) setIsRating(!isRating);
     };
 
     if (isLoading) return <Spin></Spin>;
