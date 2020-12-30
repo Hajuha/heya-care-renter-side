@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import roomAPI from '../../services/apis/room';
 import './style.scss';
-import { Button, Card, Divider, Input, Rate, Spin, Typography } from 'antd';
+import {
+    Button,
+    Card,
+    Divider,
+    Input,
+    notification,
+    Rate,
+    Spin,
+    Typography,
+} from 'antd';
 import { Comment } from 'antd';
 import moment from 'moment';
+import { AlertFilled, HeartFilled } from '@ant-design/icons';
 const desc = [
     'Phòng tệ.',
     'Phòng xấu.',
@@ -11,6 +22,7 @@ const desc = [
     'Phòng tốt',
     'Phòng tuyệt vời !',
 ];
+
 const RoomComment = (props) => {
     const { id, room } = props;
     const [roomRating, setRoomRating] = useState({
@@ -22,6 +34,7 @@ const RoomComment = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [star, setStar] = useState(0);
     const [comment, setComment] = useState('');
+    const user = useSelector((state) => state.user);
     useEffect(() => {
         const data = {
             accommodation_id: id,
@@ -43,7 +56,26 @@ const RoomComment = (props) => {
             setIsRating(false);
             setRated(true);
         });
-        console.log(data);
+    };
+    const openNotification = () => {
+        const args = {
+            message: 'Phòng đã được lưu vào danh sách ưa thích',
+
+            duration: 3,
+        };
+        notification.open(args);
+    };
+
+    const addFavorite = () => {
+        const data = {
+            accommodation_id: id,
+        };
+        openNotification();
+        roomAPI.addFavorite(data).then((res) => {});
+    };
+
+    const createRating = () => {
+        if (user.access_token) setIsLoading(!isLoading);
     };
 
     if (isLoading) return <Spin></Spin>;
@@ -56,17 +88,36 @@ const RoomComment = (props) => {
                 </div>
                 <div>
                     <Rate
+                        style={{ margin: '12px 12px' }}
                         disabled
                         defaultValue={roomRating.average_rating}></Rate>
                     ({roomRating.ratings.length} đánh giá)
                     <Button
-                        style={{ marginLeft: '12px' }}
-                        onClick={() => setIsRating(!isRating)}>
+                        style={{ margin: '12px 12px' }}
+                        onClick={() => createRating()}>
                         {' '}
                         Thêm đánh giá của bạn{' '}
                     </Button>
+                    <Button
+                        shape='round'
+                        style={{ margin: '12px 12px', float: 'right' }}>
+                        <AlertFilled />
+                        Báo cáo bài đăng
+                    </Button>
+                    <Button
+                        onClick={addFavorite}
+                        shape='round'
+                        style={{ margin: '12px 12px', float: 'right' }}>
+                        <HeartFilled style={{ color: 'red' }} />
+                        Lưu tin
+                    </Button>
                 </div>
             </div>
+            {!user.access_token && (
+                <Typography.Text type='danger'>
+                    Bạn chưa đăng nhập nên không thể đăng bình luận !
+                </Typography.Text>
+            )}
             {isRating ? (
                 <Card className='create-rating'>
                     {!rated ? (

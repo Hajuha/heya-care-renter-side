@@ -10,19 +10,20 @@ import 'antd/dist/antd.css';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { login } from '../../actions/auth';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Link, Redirect, useHistory } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
 
 const LoginPage = (props) => {
     const [isLogged, setIsLogged] = React.useState(false);
-
-    if (isLogged || props.isAuthenticated) {
-        // window.location.reload();
+    const dispatch = useDispatch();
+    const history  = useHistory()
+    if (isLogged && props.isAuthenticated) {
         return <Redirect to={'/'} />;
     }
 
     const onFinish = (values) => {
-        login(values);
+        login(values,dispatch, ()=> {history.push('/');});
+
         setIsLogged(true);
     };
 
@@ -92,52 +93,6 @@ const LoginPage = (props) => {
                                 Đăng nhập
                             </Button>
                         </Form.Item>
-
-                        <div className='or-signup-using'>
-                            hoặc tiếp tục bằng
-                        </div>
-
-                        <div className='app-social'>
-                            <div className='app-social-item'>
-                                <FacebookLogin
-                                    appId='facebookAPIKey'
-                                    autoLoad={true}
-                                    size='small'
-                                    fields='name,email,picture'
-                                    render={(renderProps) => (
-                                        <div
-                                            onClick={renderProps.onClick}
-                                            disabled={renderProps.disabled}>
-                                            <img
-                                                alt='facebook-icon'
-                                                className='logo-img'
-                                                src={FacebookIcon}
-                                            />
-                                        </div>
-                                    )}
-                                />
-                            </div>
-
-                            <div className='app-social-item'>
-                                <GoogleLogin
-                                    className='google-button ant-btn'
-                                    clientId='googleAPIKey'
-                                    render={(renderProps) => (
-                                        <Link
-                                            onClick={renderProps.onClick}
-                                            disabled={renderProps.disabled}>
-                                            <img
-                                                alt='google-icon'
-                                                className='logo-img'
-                                                src={GoogleIcon}
-                                            />
-                                        </Link>
-                                    )}
-                                    cookiePolicy={'single_host_origin'}
-                                    icon={false}
-                                />
-                            </div>
-                        </div>
                     </Form>
                     <div className='text-align-center'>
                         <p className='signin-guide'>

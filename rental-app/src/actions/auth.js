@@ -5,22 +5,28 @@ import { Redirect } from 'react-router-dom';
 
 export const userLoggedIn = (user) => ({
     type: USER_LOGGED_IN,
-    user,
+    user: user,
 });
 
-export const userLoggedOut = () => ({
-    type: USER_LOGGED_OUT,
-});
+export const userLoggedOut = () => {
+    return {
+        type: USER_LOGGED_OUT,
 
-export const login = (credentials) =>
+    };
+};
+
+export const login = (credentials, dispatch, callback) =>
     authAPI.login(credentials).then((user) => {
         localStorage.access_token = user.access_token;
         setAuthorizationHeader(user.access_token);
+        dispatch(userLoggedIn(user));
+        callback();
+        return user;
     });
-export const logout = () => (dispatch) => {
+export const logout = () => {
     localStorage.removeItem('access_token');
     setAuthorizationHeader();
-    dispatch(userLoggedOut());
+    return userLoggedOut();
 };
 
 // export const logout = () => dispatch => {

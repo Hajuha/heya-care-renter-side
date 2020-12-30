@@ -16,6 +16,12 @@
     .ant-row {
         height: (80rem/24);
     }
+
+    @media (max-width: 536px) {
+        .logo {
+            display: none !important;
+        }
+    }
     .logo {
         height: auto;
         display: flex;
@@ -28,7 +34,7 @@
     }
 
     .ant-input-group-wrapper {
-        width: 60%;
+        width: 24rem;
         background-color: #ffffff;
         border-radius: (20rem/24) !important;
         .ant-input {
@@ -90,8 +96,6 @@
     .app-user {
         position: relative;
         top: -3px;
-        // padding: 8px 0;
-        // margin: 0 16px;
         cursor: pointer;
         color: white;
 
@@ -103,11 +107,16 @@
             font-size: 20px;
             margin: 0 10px;
         }
-    }
 
-    @media (max-width: 536px) {
-        .search-bar {
-            display: none;
+        @media (max-width: 536px) {
+            .name {
+                display: none;
+            }
+        }
+        .login {
+            color: white;
+            font-size: 1rem;
+            font-family: $font-beVietnam-medium;
         }
     }
     .login {
@@ -130,5 +139,23 @@
     .ant-dropdown-menu-item {
         font-size: 1rem !important;
         height: 40px !important;
+    }
+}
+
+@media (max-width: 536px) {
+    .app-header {
+        padding: 0 12px;
+    }
+
+    .search-bar {
+        .ant-input-group-wrapper {
+            width: 100% !important;
+
+            .ant-input-group {
+                input {
+                    padding: 0.5rem 0 !important;
+                }
+            }
+        }
     }
 }

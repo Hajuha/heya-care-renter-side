@@ -4,9 +4,11 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './store';
 import setAuthorizationHeader from './utils/setAuthorizationHeader';
 import { userLoggedIn } from './actions/auth';
+import { store, persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+
 
 if (localStorage.access_token) {
     const user = {
@@ -17,7 +19,9 @@ if (localStorage.access_token) {
 }
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
     </Provider>,
     document.getElementById('root')
 );

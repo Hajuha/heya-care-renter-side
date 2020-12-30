@@ -1,20 +1,26 @@
 import { Col, Dropdown, Input, Menu, Row, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect, useLocation } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router';
 import Logo from '../../../assets/icons/header-logo.svg';
 import { browserHistory } from '../../../helpers';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import authAPI from '../../../services/apis/auth';
 import * as actions from '../../../actions/auth';
 import './style.scss';
 import Avatar from 'antd/lib/avatar/avatar';
-import { DownOutlined, LogoutOutlined } from '@ant-design/icons';
+import { DownOutlined, HeartOutlined, LogoutOutlined } from '@ant-design/icons';
 
 const AppHeader = (props) => {
     const [scrolled, setScrolled] = React.useState(false);
-    const [currentUser, setCurrentUser] = useState({});
-    const { isAuthenticated, logout } = props;
 
+    const user = useSelector((state) => state.user);
+    const [currentUser, setCurrentUser] = useState({});
+    const dispatch = useDispatch();
+    const { isAuthenticated } = props;
+    const [state, setState] = React.useState(false);
+    const location = useLocation();
+    const histiory = useHistory();
     const handleScroll = () => {
         const offset = window.scrollY;
         if (offset > 200) {
@@ -25,17 +31,17 @@ const AppHeader = (props) => {
     };
 
     useEffect(() => {
-        if (isAuthenticated) {
+        if (user.access_token) {
             authAPI.getUser().then((user) => {
                 setCurrentUser(user.data);
             });
         }
-    }, []);
+    }, [location]);
 
     React.useEffect(() => {
         window.addEventListener('scroll', handleScroll);
     });
-
+    useEffect(() => {}, [location]);
     let navbarClasses = ['app-header'];
 
     if (scrolled) {
@@ -48,20 +54,31 @@ const AppHeader = (props) => {
         </Select>
     );
     const searchRoom = (values) => {
-        browserHistory.push({
+        histiory.push({
             pathname: '/results',
             search: '?' + new URLSearchParams({ q: values }).toString(),
         });
-        window.location.reload();
     };
 
     const handleLogout = () => {
-        browserHistory.push('/login');
-        logout();
+        histiory.push('/login');
+        dispatch(actions.logout());
+    };
+
+    const handleFavorite = () => {
+        histiory.push('/favorite');
     };
 
     const userMenu = (
         <Menu>
+            <Menu.Item data-testid='btn-logout' onClick={handleFavorite}>
+                <HeartOutlined />
+                <span>Phòng đã lưu</span>
+            </Menu.Item>
+            <Menu.Item data-testid='btn-logout' onClick={handleFavorite}>
+                <HeartOutlined />
+                <span>Danh sách ưa thích</span>
+            </Menu.Item>
             <Menu.Item data-testid='btn-logout' onClick={handleLogout}>
                 <LogoutOutlined />
                 <span>Đăng xuất</span>
@@ -72,7 +89,7 @@ const AppHeader = (props) => {
     return (
         <React.Fragment>
             <div className={navbarClasses.join(' ')}>
-                <Row align='middle' justify='center'>
+                <Row align='middle' justify='space-between'>
                     <Col md={6} offset={{ sm: '0', md: '2' }}>
                         <Link className='logo' to='/'>
                             <img
@@ -81,7 +98,7 @@ const AppHeader = (props) => {
                                 src={Logo}></img>
                         </Link>
                     </Col>
-                    <Col md={13}>
+                    <Col md={13} sm={0}>
                         <div className='search-bar'>
                             <Input.Search
                                 onSearch={searchRoom}
@@ -89,17 +106,17 @@ const AppHeader = (props) => {
                                 placeholder='Tìm kiếm theo địa điểm, quận, tên đường,...'></Input.Search>
                         </div>
                     </Col>
-                    <Col md={3}>
-                        {!isAuthenticated ? (
+                    <Col md={5}>
+                        {!user.access_token ? (
                             <Link to='/login'>
                                 <span className='login'>Sign In</span>
                             </Link>
                         ) : (
-                            <Dropdown overlay={userMenu} trigger={['click']}>
+                            <Dropdown overlay={userMenu}>
                                 <span className='app-user'>
                                     <Avatar
                                         src={currentUser.avatar_url}
-                                        size={64}
+                                        size={{ md: '64', sm: '32' }}
                                     />
                                     <span className='name'>
                                         {currentUser.fullname}

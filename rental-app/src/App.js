@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { Switch, Route, BrowserRouter as Router} from 'react-router-dom';
+// import { Switch, Route, BrowserRouter as Router} from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Result from './pages/Result';
 import Login from './pages/Login';
@@ -10,16 +10,20 @@ import 'font-awesome/css/font-awesome.min.css';
 import AppHeader from './components/Layout/header';
 import Footer from './components/Layout/footer';
 import Room from './pages/Room';
-import UserRoute from './routes/UserRoute'
-import GuestRoute from './routes/GuestRoute'
-// import { browserHistory } from './helpers';
-    
-require('dotenv').config();
+import UserRoute from './routes/UserRoute';
+import GuestRoute from './routes/GuestRoute';
+import { browserHistory } from './helpers';
+import { createBrowserHistory } from 'history';
+import { Redirect, Route, Router, Switch, useLocation } from 'react-router-dom';
+import Favorite from './components/Favorite';
+import SignupConfirm from './components/SignupPage/SignupConfirm';
 
+require('dotenv').config();
+export const history = createBrowserHistory();
 const App = () => {
     return (
         <React.Fragment>
-            <Router>
+            <Router history={history}>
                 <AppHeader />
 
                 <Suspense fallback={<div>Loading...</div>}>
@@ -32,12 +36,20 @@ const App = () => {
                             path='/register/success'
                             component={SignupSuccess}
                         />
-
+                        <GuestRoute
+                            path='/register/confirm_email/:id'
+                            component={SignupConfirm}
+                        />
+                        <UserRoute
+                            exact
+                            path='/favorite'
+                            component={Favorite}
+                        />
                         <Route path='/results/' children={<Result />} />
                         <Route path='/room/:id' children={<Room />} />
                     </Switch>
                 </Suspense>
-                <Footer/>
+                <Footer />
             </Router>
         </React.Fragment>
     );

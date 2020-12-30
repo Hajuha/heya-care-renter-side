@@ -11,6 +11,7 @@ import {
     Slider,
     InputNumber,
     Pagination,
+    Divider,
 } from 'antd';
 import RoomPlaceholder from '../RoomPlaceholder';
 import './style.scss';
@@ -39,8 +40,16 @@ const ResultPage = (props) => {
             electricity_price_min: 0,
             water_price_max: 0,
             water_price_min: 0,
+            _page: 1,
         };
     });
+
+    useEffect(() => {
+        setFilterOption((filterOptions) => ({
+            ...filterOptions,
+            q: searchQuery,
+        }));
+    }, [searchQuery]);
 
     let paginationOptions = {
         onChange: (page, pageSize) => {
@@ -50,6 +59,7 @@ const ResultPage = (props) => {
             }));
             scrollTop();
         },
+        current: filterOptions._page,
         total: total,
     };
     const [showScroll, setShowScroll] = useState(false);
@@ -90,19 +100,13 @@ const ResultPage = (props) => {
     };
 
     if (isLoading) {
-        return <Spin className='app-spinner' />;
+        return <></>;
     }
 
     const priceFormat = (values) => {
         return `${values.toLocaleString()}đ`;
     };
-    ax: 0
-    electricity_price_min: 0
-    price_max: 0
-    price_min: 0
-    q: ""
-    water_price_max: 0
-    water_price_min: 0
+
     return (
         <div className='result-page'>
             <Row gutter={{ lg: '32', sm: '0' }}>
@@ -115,8 +119,8 @@ const ResultPage = (props) => {
                     }}>
                     <ArrowUpOutlined className='icon' />
                 </div>
-                <Col md={8} sm={24}>
-                    <Card style={{ width: '100%' }}>
+                <Col md={8} sm={24} style={{ width: '100%' }}>
+                    <Card>
                         <Typography.Title level={4}>Bộ lọc</Typography.Title>
                         <Collapse bordered={false}>
                             <Panel header={'Giá tiền'} key='1'>
@@ -130,6 +134,7 @@ const ResultPage = (props) => {
                                     onAfterChange={(values) => {
                                         setFilterOption((filterOptions) => ({
                                             ...filterOptions,
+                                            _page: 1,
                                             price_max: values[1],
                                             price_min: values[0],
                                         }));
@@ -159,6 +164,7 @@ const ResultPage = (props) => {
                                     onAfterChange={(values) => {
                                         setFilterOption((filterOptions) => ({
                                             ...filterOptions,
+                                            _page: 1,
                                             electricity_price_max: values[1],
                                             electricity_price_min: values[0],
                                         }));
@@ -187,6 +193,7 @@ const ResultPage = (props) => {
                                     onAfterChange={(values) => {
                                         setFilterOption((filterOptions) => ({
                                             ...filterOptions,
+                                            _page: 1,
                                             water_price_max: values[1],
                                             water_price_min: values[0],
                                         }));
@@ -214,6 +221,7 @@ const ResultPage = (props) => {
                                             setFilterOption(
                                                 (filterOptions) => ({
                                                     ...filterOptions,
+                                                    _page: 1,
                                                     is_stay_with_the_owner:
                                                         e.target.value,
                                                 })
@@ -232,6 +240,7 @@ const ResultPage = (props) => {
                                             setFilterOption(
                                                 (filterOptions) => ({
                                                     ...filterOptions,
+                                                    _page: 1,
                                                     has_air_conditioning:
                                                         e.target.value,
                                                 })
@@ -250,6 +259,7 @@ const ResultPage = (props) => {
                                             setFilterOption(
                                                 (filterOptions) => ({
                                                     ...filterOptions,
+                                                    _page: 1,
                                                     has_electric_water_heater:
                                                         e.target.value,
                                                 })
@@ -268,6 +278,7 @@ const ResultPage = (props) => {
                                             setFilterOption(
                                                 (filterOptions) => ({
                                                     ...filterOptions,
+                                                    _page: 1,
                                                     has_balcony: e.target.value,
                                                 })
                                             );
@@ -285,6 +296,7 @@ const ResultPage = (props) => {
                                             setFilterOption(
                                                 (filterOptions) => ({
                                                     ...filterOptions,
+                                                    _page: 1,
                                                     kitchen_type:
                                                         e.target.value,
                                                 })
@@ -304,6 +316,7 @@ const ResultPage = (props) => {
                                             setFilterOption(
                                                 (filterOptions) => ({
                                                     ...filterOptions,
+                                                    _page: 1,
                                                     bathroom_type:
                                                         e.target.value,
                                                 })
@@ -324,13 +337,32 @@ const ResultPage = (props) => {
                             <Empty />{' '}
                         </Card>
                     ) : (
-                        <div>
-                            <Pagination {...paginationOptions} />
+                        <Card>
+                            {total === 0 ? (
+                                <Typography.Title level={4}>
+                                    Không có phòng nào phù hợp
+                                </Typography.Title>
+                            ) : (
+                                <Typography.Title level={4}>
+                                    {' '}
+                                    Hiển thị kết quả{' '}
+                                    {`${
+                                        (filterOptions._page - 1) * 10 + 1
+                                    }`} -{' '}
+                                    {`${
+                                        filterOptions._page * 10 < total
+                                            ? filterOptions._page * 10
+                                            : total
+                                    }`}{' '}
+                                    của {total} phòng
+                                </Typography.Title>
+                            )}
+                            <Divider />
                             {rooms.map((room, index) => (
                                 <RoomPlaceholder key={index} Room={room} />
                             ))}
                             <Pagination {...paginationOptions} />
-                        </div>
+                        </Card>
                     )}
                 </Col>
             </Row>

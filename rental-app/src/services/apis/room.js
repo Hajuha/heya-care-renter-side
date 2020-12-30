@@ -81,4 +81,42 @@ export default {
         }).then((res) => {
             return res.data;
         }),
+    addFavorite: (data) =>
+        axios({
+            method: 'post',
+            data: {
+                accommodation_id: data.accommodation_id,
+            },
+            url: `${server_endpoint}/favorite/create`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => {
+            return res.data;
+        }),
+    getFavorite: (data) =>
+        axios({
+            method: 'post',
+            data: {
+                _page: data._page,
+                _limit: data._limit,
+            },
+            url: `${server_endpoint}/favorite/get`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => {
+            return res.data;
+        }),
+    removeFavorite: (data) =>
+        axios({
+            method: 'post',
+            data: [],
+            url: `${server_endpoint}/favorite/${data.accommodation_id}/remove`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => {
+            return res.data;
+        }),
 };
